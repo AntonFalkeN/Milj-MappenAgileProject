@@ -1,12 +1,20 @@
+
+
+import os
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+# from dotenv import load_dotenv
+
+# 1. Load the variables from the .env file
+# load_dotenv()
 
 app = FastAPI()
 
-# Allow Vite (or any deployed frontend) to talk to this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -14,9 +22,53 @@ app.add_middleware(
 
 @app.get("/api/items")
 def get_items():
-    # Temporary hardcoded data until you connect your .sql files
-    return [
-        {"id": 1, "name": "Old Bicycle", "location": "Odenplan"},
-        {"id": 2, "name": "Wooden Chair", "location": "T-Centralen"},
-        {"id": 3, "name": "CRT Monitor", "location": "Slussen"}
-    ]
+    # 2. Get the database URL from the .env file
+    # db_url = os.getenv("DATABASE_URL")
+    
+    with open("sql_queries/testing.sql", "r") as file:
+        query = file.read()
+
+    conn = psycopg2.connect(host="localhost",
+            user="postgres",
+            dbname="agile",
+            password="postgres")
+    conn.autocommit = True
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    
+    try:
+        # 5. Execute the query and fetch the data
+        cursor.execute(query)
+        items = cursor.fetchall()
+        print(items)
+        return items
+    finally:
+        # 6. ALWAYS close the connection when done
+        cursor.close()
+        conn.close()
+
+
+
+
+
+# from fastapi import FastAPI
+# from fastapi.middleware.cors import CORSMiddleware
+
+# app = FastAPI()
+
+# # Allow Vite (or any deployed frontend) to talk to this backend
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"], 
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# @app.get("/api/items")
+# def get_items():
+#     # Temporary hardcoded data until you connect your .sql files
+#     return [
+#         {"id": 1, "name": "Old Bicycle", "location": "Odenplan"},
+#         {"id": 2, "name": "Wooden Chair", "location": "T-Centralen"},
+#         {"id": 3, "name": "CRT Monitor", "location": "Slussen"}
+#     ]
