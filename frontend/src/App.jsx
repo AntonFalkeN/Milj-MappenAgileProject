@@ -6,7 +6,6 @@ import MapComponent from './MapComponent';
 import './App.css'
 
 export default function App() {
-    console.log(import.meta.env.VITE_MAPBOX_TOKEN);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
