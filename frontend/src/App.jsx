@@ -18,6 +18,7 @@ export default function App() {
         .catch(error => console.error("Could not connect to backend:", error));
     }, []);
 
+    
 
     return (
 
@@ -37,7 +38,10 @@ export default function App() {
             </ul>
             )}      
 
-            <MapComponent/>
+            <MapComponent markers={[ // PLACEHOLDER VALUES, LOAD FROM BACKEND/DATABASE LATER
+                { id: 1, lng: 11.97695, lat: 57.68962 },
+                { id: 2, lng: 11.936662797883773, lat: 57.70653055063925 }
+            ]}/>
         </div>   
         
     );
