@@ -37,10 +37,9 @@ export default function App() {
                 ))}
             </ul>
             )}      
-
             <MapComponent markers={[ // PLACEHOLDER VALUES, LOAD FROM BACKEND/DATABASE LATER
-                { id: 1, lng: 11.97695, lat: 57.68962 },
-                { id: 2, lng: 11.936662797883773, lat: 57.70653055063925 }
+                { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
+                { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
             ]}/>
         </div>   
         
