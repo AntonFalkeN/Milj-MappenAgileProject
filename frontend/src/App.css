@@ -1,4 +1,24 @@
-.counter {
+#account-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+#create-account-button, 
+#login-button {
+  background-color: #aa3bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* .counter {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -181,4 +201,4 @@
     right: 0;
     border-right-color: var(--border);
   }
-}
+} */
