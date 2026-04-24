@@ -4,6 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import MapComponent from './MapComponent';
 import './App.css'
+import AnnouncementDetails from './AnnouncementDetails';
 
 export default function App() {
     const [items, setItems] = useState([]);
