@@ -23,15 +23,23 @@ app.add_middleware(
 @app.get("/api/items")
 def get_items():
     # 2. Get the database URL from the .env file
-    # db_url = os.getenv("DATABASE_URL")
+    db_url = os.getenv("DATABASE_URL")
     
-    with open("sql_queries/testing.sql", "r") as file:
+    # For local development
+    # with open("sql_queries/testing.sql", "r") as file:
+    #     query = file.read()
+
+    query_path = os.path.join(os.getcwd(), "sql_queries", "testing.sql")
+    with open(query_path, "r") as file:
         query = file.read()
 
-    conn = psycopg2.connect(host="localhost",
-            user="postgres",
-            dbname="agile",
-            password="postgres")
+    # For local development
+    # conn = psycopg2.connect(host="localhost",
+    #         user="postgres",
+    #         dbname="agile",
+    #         password="postgres")
+
+    conn = psycopg2.connect(db_url)
     conn.autocommit = True
     cursor = conn.cursor(cursor_factory=RealDictCursor)
     
