@@ -32,6 +32,29 @@ function Map() {
         .catch(error => console.error("Could not connect to backend:", error));
     }, []);
 
+    // Default markers would be best to load from database
+    // This can act as a temp database
+    const [markers, setMarkers] = useState([
+        { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
+        { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
+    ]);
+
+    // add or remove markers
+    useEffect(() => {
+        window.addMarker = (marker) => {
+            setMarkers(prev => [...prev, marker]);
+            console.log('Marker added!', marker);
+        };
+
+        window.removeMarker = (id) => {
+            setMarkers(prev => prev.filter(m => m.id !== id));
+            console.log('Marker removed:', id);
+        };
+        return () => {
+            delete window.addMarker;
+            delete window.removeMarker;
+        };
+    },[]);
 
     return (
 
@@ -53,10 +76,7 @@ function Map() {
                 ))}
             </ul>
             )}      
-            <MapComponent markers={[ // PLACEHOLDER VALUES, LOAD FROM BACKEND/DATABASE LATER
-                { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
-                { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
-            ]}/>
+            <MapComponent markers={markers} />
         </div>   
         
     );
@@ -73,4 +93,3 @@ export default function App() {
         </Routes>                 
     );
 }
-
