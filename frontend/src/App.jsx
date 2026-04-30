@@ -9,7 +9,7 @@ import Login from "./Login"
 
 import AnnouncementDetails from './AnnouncementDetails';
 
-function Map() {
+function MapPage() {
     const [items, setItems] = useState([]);
 
     const navigate = useNavigate();
@@ -67,9 +67,10 @@ export default function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Map />}></Route>
+            <Route path="/" element={<MapPage />}></Route>
             <Route path="/create-account" element={<CreateAccount />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/location/:id" element={<AnnouncementDetails />} />
         </Routes>                 
     );
 }
