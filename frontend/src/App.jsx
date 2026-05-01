@@ -5,8 +5,8 @@ import './App.css'
 import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import CreateAccount from './CreateAccount';
-import Login from "./Login"
-
+import Login from "./Login";
+import Home from './pages/Home';  
 import AnnouncementDetails from './AnnouncementDetails';
 
 function Map() {
@@ -67,9 +67,10 @@ export default function App() {
 
     return (
         <Routes>
-            <Route path="/" element={<Map />}></Route>
+            <Route path="/" element={<Home />}></Route>
             <Route path="/create-account" element={<CreateAccount />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/map" element={<Map />}></Route>
         </Routes>                 
     );
 }
