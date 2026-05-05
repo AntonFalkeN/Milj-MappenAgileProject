@@ -1,17 +1,12 @@
 // ProfilePage.jsx
 import "./ProfilePage.css";
 import BottomNav from "../components/BottomNav"
+import TopBar from "../components/TopBar";
 
 export default function ProfilePage() {
         return (
     <div className="page">
-
-      {/* HEADER */}
-        <div className="header">
-        <h1>Profile</h1>
-        <div className="avatar-icon"></div>
-        </div>
-
+      <TopBar title="Map" onSearch={(value) => console.log("Searching for:", value)}  />
       {/* CONTENT */}
         <div className="content">
 

@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import heroImg from '../assets/hero.png'
 import MapComponent from '../components/MapComponent.jsx';
 import './App.css'
-import { useNavigate } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import CreateAccount from './CreateAccount.jsx';
 import Login from './Login.jsx';
 import ProfilePage from './ProfilePage.jsx';
 import BottomNav from '../components/BottomNav.jsx';
+import TopBar from '../components/TopBar.jsx';
 
 import AnnouncementDetails from '../AnnouncementDetails.jsx';
 
@@ -60,14 +60,14 @@ function MapPage() {
 
     return (
 
-        <div>         
-        
+        <div className="page">        
+            <TopBar title="Map" onSearch={(value) => console.log("Searching for:", value)} />
 
             <div id="account-buttons">
                 <button id="login-button" onClick={onLogin}>Login</button>
                 <button id="create-account-button" onClick={onCreateAccount}>Create Account</button> 
             </div>     
-      
+    
             {items.length === 0 ? (
             <p>Loading data from Python...</p>
             ) : (
@@ -85,17 +85,16 @@ function MapPage() {
         
     );
 }
+;
 
-
-export default function App() {    
-
+export default function App() {
     return (
         <Routes>
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/" element={<MapPage />}></Route>
-            <Route path="/create-account" element={<CreateAccount />}></Route>
-            <Route path="/login" element={<Login />}></Route>
+            <Route path="/" element={<MapPage />} />
+            <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/location/:id" element={<AnnouncementDetails />} />
-        </Routes>                 
+        </Routes>
     );
 }
