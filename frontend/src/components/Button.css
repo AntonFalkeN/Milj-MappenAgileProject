@@ -1,0 +1,20 @@
+.primary-button {
+  background-color: #aa3bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.publish-button {
+  background-color: #a8cf9d;
+  color: #1f351f;
+  border-radius: 12px;
+  padding: 1rem 3rem;
+  font-size: clamp(20px, 5vw, 32px);
+}
+
+.login-button {
+  background-color: purple;
+  color: white;
+}
