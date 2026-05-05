@@ -1,12 +1,26 @@
 import { useNavigate } from "react-router-dom"; // Hämta useNavigate (funktion) för att navigera mellan sidor
 import Button from "../components/Button"; // Importera Button-komponenten
 import "./Home.css"; // Importera CSS för Home-sidan
+import Footer from "../components/Footer";
 
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.
 
   return (
     <div className="home-page">
+
+      <svg
+        className="green-background-shape"
+        viewBox="0 0 440 1190"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect y="38" width="440" height="1152" fill="#DCFFD0" />
+        <path d="M0 0L19.5 27L68 38H0V0Z" fill="#DCFFD0" />
+        <path d="M440 0L423.368 27L382 38H440V0Z" fill="#DCFFD0" />
+      </svg>
+      <main className="home-content">
+
       <svg
         className="home-header-svg"
         viewBox="0 0 440 140"
@@ -120,14 +134,18 @@ const Home = () => {
           </filter>
         </defs>
       </svg>
-      <Button
-        text="Publish"
-        variant="publish-button"
-        onClick={() => navigate("/map")}
-      />
-      <h1>Start</h1>
-      <p>Välkommen till appen</p>
-      {/*<Button text="Gå till kartan" onClick={() => navigate('/map')} />  Lägg till en knapp som navigerar till kartan när den klickas */}
+
+      <div className="publish-button-wrapper">
+        <Button
+          text="Publish"
+          variant="publish-button"
+          onClick={() => navigate("/map")}
+        />
+      </div>
+      
+      </main>
+
+      <Footer />
     </div>
   );
 };
