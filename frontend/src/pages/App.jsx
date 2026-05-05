@@ -8,6 +8,7 @@ import CreateAccount from "./CreateAccount.jsx";
 import Login from "./Login.jsx";
 import ProfilePage from "./ProfilePage.jsx";
 import BottomNav from "../components/BottomNav.jsx";
+import Home from "./Home.jsx";
 
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
@@ -101,10 +102,11 @@ export default function App() {
   return (
     <Routes>
       <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/" element={<MapPage />}></Route>
+      <Route path="/" element={<Home />}></Route>
       <Route path="/create-account" element={<CreateAccount />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/location/:id" element={<AnnouncementDetails />} />
+      <Route path="/map" element={<MapPage />} />
     </Routes>
   );
 }

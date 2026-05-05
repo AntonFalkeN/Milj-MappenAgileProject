@@ -24,7 +24,7 @@ function Footer() {
           ry="15.5"
           transform="rotate(-180 437 15.5)"
           fill="black"
-          fill-opacity="0.2"
+          fillOpacity="0.2"
         />
         <ellipse
           cx="22"
@@ -41,7 +41,7 @@ function Footer() {
           ry="15.5"
           transform="matrix(1 0 0 -1 -17 31)"
           fill="black"
-          fill-opacity="0.2"
+          fillOpacity="0.2"
         />
         <ellipse
           cx="49.5"
@@ -58,7 +58,7 @@ function Footer() {
           ry="24"
           transform="matrix(1 0 0 -1 -17 63)"
           fill="black"
-          fill-opacity="0.2"
+          fillOpacity="0.2"
         />
         <ellipse
           cx="410.5"
@@ -75,7 +75,7 @@ function Footer() {
           ry="24"
           transform="rotate(-180 410.5 39)"
           fill="black"
-          fill-opacity="0.2"
+          fillOpacity="0.2"
         />
         <rect
           width="440"
@@ -88,7 +88,7 @@ function Footer() {
           height="43"
           transform="matrix(1 0 0 -1 0 84)"
           fill="black"
-          fill-opacity="0.2"
+          fillOpacity="0.2"
         />
       </svg>
 
@@ -100,8 +100,8 @@ function Footer() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M14.7801 0.587225L26.6047 11.9328L23.649 14.7687L13.3023 4.84108L2.95561 14.7687L0 11.9328L11.8245 0.587225C12.2165 0.211236 12.7481 1.62125e-05 13.3023 1.62125e-05C13.8566 1.62125e-05 14.3882 0.211236 14.7801 0.587225Z"
             fill="white"
           />
