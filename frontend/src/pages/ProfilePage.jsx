@@ -1,38 +1,35 @@
 // ProfilePage.jsx
 import "./ProfilePage.css";
-import BottomNav from "./components/BottomNav"
+import BottomNav from "../components/BottomNav.jsx";
 
 export default function ProfilePage() {
-        return (
+  return (
     <div className="page">
-
       {/* HEADER */}
-        <div className="header">
+      <div className="header">
         <h1>Profile</h1>
         <div className="avatar-icon"></div>
-        </div>
+      </div>
 
       {/* CONTENT */}
-        <div className="content">
-
+      <div className="content">
         <h2 className="name">Alex Löfstedt</h2>
 
         {/* PROFILE IMAGE */}
         <div className="image-box">
-            <span>🖼️</span>
+          <span>🖼️</span>
         </div>
         <p className="image-text">Profile picture</p>
 
         {/* DESCRIPTION */}
         <div className="description-section">
-            <h3>Description</h3>
-            <div className="description-box">
+          <h3>Description</h3>
+          <div className="description-box">
             Example, pick up pant baskets at Kroksslätts Parkgata 29
-            </div>
+          </div>
         </div>
-          <BottomNav/>
-        </div>
-
+        <BottomNav />
+      </div>
     </div>
-    );
+  );
 }
