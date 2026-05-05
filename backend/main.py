@@ -3,12 +3,13 @@
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import handlePins
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 # 1. Load the variables from the .env file
-# load_dotenv()
+load_dotenv()
 
 app = FastAPI()
 
@@ -29,9 +30,9 @@ def get_items():
     # with open("sql_queries/testing.sql", "r") as file:
     #     query = file.read()
 
-    query_path = os.path.join(os.getcwd(), "sql_queries", "testing.sql")
-    with open(query_path, "r") as file:
-        query = file.read()
+    # query_path = os.path.join(os.getcwd(), "sql_queries", "testing.sql")
+    # with open(query_path, "r") as file:
+    #     query = file.read()
 
     # For local development
     # conn = psycopg2.connect(host="localhost",
@@ -42,13 +43,18 @@ def get_items():
     conn = psycopg2.connect(db_url)
     conn.autocommit = True
     cursor = conn.cursor(cursor_factory=RealDictCursor)
-    
+        
     try:
         # 5. Execute the query and fetch the data
-        cursor.execute(query)
-        items = cursor.fetchall()
-        print(items)
-        return items
+        # cursor.execute(query)
+        # items = cursor.fetchall()
+        # print(items)
+
+        handlePins.insertPin("Johanneberg", 11.97695, 57.68962, "Campus Johanneberg", "Chalmers University of Technology (Johanneberg)")
+        handlePins.insertPin("Lindholmen", 11.936662797883773, 57.70653055063925, "Campus Lindholmen", "Chalmers University of Technology (Lindholmen)")
+
+        pins = handlePins.getPins()
+        return pins
     finally:
         # 6. ALWAYS close the connection when done
         cursor.close()

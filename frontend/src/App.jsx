@@ -10,7 +10,16 @@ import Login from "./Login"
 import AnnouncementDetails from './AnnouncementDetails';
 
 function MapPage() {
-    const [items, setItems] = useState([]);
+    // const [items, setItems] = useState([]);
+
+
+    // Default markers would be best to load from database
+    // This can act as a temp database
+    const [markers, setMarkers] = useState([]);
+    // = useState([
+    //     { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
+    //     { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
+    // ]);
 
     const navigate = useNavigate();
     const onCreateAccount = () => {        
@@ -24,20 +33,14 @@ function MapPage() {
 
     // Fetch from backend
     useEffect(() => {
-      // Vite uses import.meta.env to read your .env file securely
+      // Vite uses import.meta.env to read your .env file securely      
         const backendUrl = import.meta.env.VITE_API_URL;
         fetch(`${backendUrl}/api/items`)
         .then(response => response.json())
-        .then(data => setItems(data))
-        .catch(error => console.error("Could not connect to backend:", error));
+        .then(data => setMarkers(data))
+        .catch(error => console.error("Could not connect to backend:", error));        
     }, []);
 
-    // Default markers would be best to load from database
-    // This can act as a temp database
-    const [markers, setMarkers] = useState([
-        { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
-        { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
-    ]);
 
     // add or remove markers
     useEffect(() => {
@@ -65,17 +68,17 @@ function MapPage() {
                 <button id="create-account-button" onClick={onCreateAccount}>Create Account</button>
             </div>     
       
-            {items.length === 0 ? (
+            {/* {items.length === 0 ? (
             <p>Loading data from Python...</p>
             ) : (
-            <ul>
-                {items.map(item => (
-                <li key={item.id}>
-                    <strong>{item.name}</strong> - Pick up at: {item.location}
-                </li>
-                ))}
-            </ul>
-            )}      
+            // <ul>
+            //     {items.map(item => (
+            //     <li key={item.id}>
+            //         <strong>{item.name}</strong> - Pick up at: {item.location}
+            //     </li>
+            //     ))}
+            // </ul>
+            )}       */}
             <MapComponent markers={markers} />
         </div>   
         
