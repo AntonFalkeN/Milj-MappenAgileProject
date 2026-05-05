@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
-import heroImg from './assets/hero.png'
+import heroImg from '../assets/hero.png'
 import MapComponent from '../components/MapComponent.jsx';
 import './App.css'
 import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import CreateAccount from '../CreateAccount.jsx';
+import CreateAccount from './CreateAccount.jsx';
 import Login from './Login.jsx';
-import ProfilePage from '../ProfilePage.jsx';
+import ProfilePage from './ProfilePage.jsx';
 import BottomNav from '../components/BottomNav.jsx';
 
 import AnnouncementDetails from '../AnnouncementDetails.jsx';

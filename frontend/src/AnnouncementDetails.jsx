@@ -1,6 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ReturnButton from "./ReturnButton";
+import ReturnButton from "./components/ReturnButton";
 
 export default function AnnouncementDetails() {
     const { id } = useParams();

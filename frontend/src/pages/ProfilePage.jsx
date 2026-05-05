@@ -1,6 +1,6 @@
 // ProfilePage.jsx
 import "./ProfilePage.css";
-import BottomNav from "./components/BottomNav"
+import BottomNav from "../components/BottomNav"
 
 export default function ProfilePage() {
         return (
