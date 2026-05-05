@@ -13,7 +13,7 @@ import Home from "./Home.jsx";
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
 function MapPage() {
-  const [items, setItems] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
   const navigate = useNavigate();
   const onCreateAccount = () => {
@@ -30,28 +30,9 @@ function MapPage() {
     const backendUrl = import.meta.env.VITE_API_URL;
     fetch(`${backendUrl}/api/items`)
       .then((response) => response.json())
-      .then((data) => setItems(data))
+      .then((data) => setMarkers(data))
       .catch((error) => console.error("Could not connect to backend:", error));
-  }, []);
-
-  // Default markers would be best to load from database
-  // This can act as a temp database
-  const [markers, setMarkers] = useState([
-    {
-      id: "Johanneberg",
-      lng: 11.97695,
-      lat: 57.68962,
-      title: "Campus Johanneberg",
-      description: "Chalmers University of Technology (Johanneberg)",
-    },
-    {
-      id: "Lindholmen",
-      lng: 11.936662797883773,
-      lat: 57.70653055063925,
-      title: "Campus Lindholmen",
-      description: "Chalmers University of Technology (Lindholmen)",
-    },
-  ]);
+  }, []);  
 
   // add or remove markers
   useEffect(() => {
@@ -81,7 +62,7 @@ function MapPage() {
         </button>
       </div>
 
-      {items.length === 0 ? (
+      {/* {items.length === 0 ? (
         <p>Loading data from Python...</p>
       ) : (
         <ul>
@@ -91,7 +72,7 @@ function MapPage() {
             </li>
           ))}
         </ul>
-      )}
+      )} */}
       <MapComponent markers={markers} />
       <BottomNav />
     </div>
