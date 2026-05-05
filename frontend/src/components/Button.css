@@ -1,0 +1,22 @@
+.primary-button {
+  background-color: #aa3bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.publish-button {
+  background-color: #a8cf9d;
+  color: #1f351f;
+  border-radius: 12px;
+  padding: 0.7rem 3rem;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.login-button {
+  background-color: purple;
+  color: white;
+}
