@@ -1,10 +1,9 @@
-
-
 import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 # from dotenv import load_dotenv
 
 # 1. Load the variables from the .env file
@@ -55,9 +54,15 @@ def get_items():
         conn.close()
 
 
+class LoginRequest(BaseModel):
+    name:str
+    password:str
 
-
-
+@app.post("/api/login")
+def login(data:LoginRequest):
+    print(data.name)
+    print(data.password)
+    return {"status": "ok", "user": data.name}
 # from fastapi import FastAPI
 # from fastapi.middleware.cors import CORSMiddleware
 
