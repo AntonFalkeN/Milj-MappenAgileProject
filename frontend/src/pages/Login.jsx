@@ -7,7 +7,10 @@ export default function CreateAccount() {
 
     async function sendForm(event){
         event.preventDefault(); // stoppar sidreload //KRÄVS FÖR SUBMIT!
-        console.log("Submitting form:", {name,password,});
+        console.log("Submitting form:", {
+            name,
+            password,
+        });
         const res = await fetch("http://localhost:8000/api/login", {
       method: "POST",
       headers: {
@@ -21,7 +24,6 @@ export default function CreateAccount() {
         console.log("Response status:", res.status);
 
         const data = await res.json();
-        console.log("Response body:", data);
     }
 
     return (
