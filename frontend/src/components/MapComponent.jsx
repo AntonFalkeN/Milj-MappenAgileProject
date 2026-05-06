@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Map, { Marker, Popup } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import PopupContent from "../PopupContent";
 
 function MapComponent({ markers }) {
   const [selected, setSelected] = React.useState(null);
@@ -43,13 +44,7 @@ function MapComponent({ markers }) {
           anchor="top"
           onClose={() => setSelected(null)}
         >
-          <div>
-            <h3>{selected.title}</h3>
-            <p>{selected.description}</p>
-            <button onClick={() => console.log("Button clicked")}>
-              Details
-            </button>
-          </div>
+          <PopupContent location={selected} />
         </Popup>
       )}
     </Map>
