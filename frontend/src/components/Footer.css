@@ -1,0 +1,83 @@
+.footer {
+  position: relative;
+  width: 100%;
+  background-color: #2d3f27;
+  color: white;
+  overflow: visible;
+}
+
+/* mörkt lager ovanpå footer-bakgrunden */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0.2;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footerShape {
+  position: absolute;
+  top: -4.3rem;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footerContent {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem 1rem 2rem;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footerTopIcon {
+  width: 1.5rem;
+  height: auto;
+  display: block;
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0rem;
+}
+
+.footerLinks a {
+  font-family: "Inter", sans-serif;
+  font-weight: 500; /* Medium */
+  color: white;
+  text-decoration: none;
+}
+
+.footerSocialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1.8rem;
+}
+
+.footerSocialIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+}
+
+.footerCopyright {
+  margin-top: 1.8rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: white;
+}

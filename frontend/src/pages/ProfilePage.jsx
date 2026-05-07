@@ -1,33 +1,35 @@
 // ProfilePage.jsx
 import "./ProfilePage.css";
-import BottomNav from "../components/BottomNav"
-import TopBar from "../components/TopBar";
+import BottomNav from "../components/BottomNav.jsx";
 
 export default function ProfilePage() {
-        return (
+  return (
     <div className="page">
-      <TopBar title="Map" onSearch={(value) => console.log("Searching for:", value)}  />
-      {/* CONTENT */}
-        <div className="content">
+      {/* HEADER */}
+      <div className="header">
+        <h1>Profile</h1>
+        <div className="avatar-icon"></div>
+      </div>
 
+      {/* CONTENT */}
+      <div className="content">
         <h2 className="name">Alex Löfstedt</h2>
 
         {/* PROFILE IMAGE */}
         <div className="image-box">
-            <span>🖼️</span>
+          <span>🖼️</span>
         </div>
         <p className="image-text">Profile picture</p>
 
         {/* DESCRIPTION */}
         <div className="description-section">
-            <h3>Description</h3>
-            <div className="description-box">
+          <h3>Description</h3>
+          <div className="description-box">
             Example, pick up pant baskets at Kroksslätts Parkgata 29
-            </div>
+          </div>
         </div>
-          <BottomNav/>
-        </div>
-
+        <BottomNav />
+      </div>
     </div>
-    );
+  );
 }
