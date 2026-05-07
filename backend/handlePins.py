@@ -79,6 +79,7 @@ def getPins():
 
     except Exception as e:
         print("Error", e)
+        return []
 
     finally:
         if cursor:

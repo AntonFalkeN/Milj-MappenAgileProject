@@ -24,6 +24,14 @@ function MapPage() {
     navigate("/login");
   };
 
+      const testMarker = {
+      id: "TEST1234",
+      lng: 11.976,
+      lat: 57.68962,
+      title: "TESTMARKER",
+      description: "TESTTEASTTEST",
+    };
+
   // Fetch from backend
   useEffect(() => {
     // Vite uses import.meta.env to read your .env file securely
@@ -36,6 +44,7 @@ function MapPage() {
 
   // add or remove markers
   useEffect(() => {
+    console.log("MARKER FROM BACKEND: ", markers);
     window.addMarker = (marker) => {
       setMarkers((prev) => [...prev, marker]);
       console.log("Marker added!", marker);
@@ -50,6 +59,21 @@ function MapPage() {
       delete window.removeMarker;
     };
   }, []);
+
+  async function deliverPin() { //take marker as parameter
+    console.log("Delivering pin:", testMarker);
+    const backendUrl = import.meta.env.VITE_API_URL;
+
+
+
+    const res = await fetch(`${backendUrl}/api/items`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(testMarker),
+    });
+    const data = await res.json();
+    console.log(data);
+  }
 
   return (
     <div>
@@ -74,6 +98,7 @@ function MapPage() {
         </ul>
       )} */}
       <MapComponent markers={markers} />
+      <button onClick={() => deliverPin()}> TEST</button>
       <BottomNav />
     </div>
   );
