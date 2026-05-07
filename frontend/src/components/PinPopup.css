@@ -1,0 +1,166 @@
+:root {
+  --modal-bg: #ffffff;
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  --primary-action: #2b6cb0;
+  --primary-action-hover: #1e4e8c;
+  --secondary-action: #e0e0e0;
+  --secondary-action-hover: #cccccc;
+  
+  --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --text-main: #323232;
+  --text-secondary: #646464;
+  --text-muted: #999999;
+  --text-error: #b00020;
+  
+  --border-light: #cccccc;
+  --border-divider: #eeeeee;
+  --hover-bg: #f5f5f5;
+  
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #cccccc;
+  --scrollbar-thumb-hover: #aaaaaa;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: var(--modal-bg);
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.modal-content h2 {
+  color: var(--text-main);
+  margin-top: 0;
+}
+
+.search-input,
+.field-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  margin: 10px 0;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--modal-bg);
+  color: var(--text-main);
+}
+
+.search-input::placeholder,
+.field-input::placeholder {
+  color: var(--text-muted);
+}
+
+.results-list {
+  list-style: none;
+  margin: 0 0 10px 0;
+  padding: 0;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.result-item {
+  padding: 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-divider);
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item:hover {
+  background: var(--hover-bg);
+}
+
+/* Typography & Layout */
+.info-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+.error-text {
+  color: var(--text-error);
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+.selected-info p {
+  margin: 8px 0;
+  color: var(--text-main);
+}
+
+.save-btn,
+.close-btn {
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.save-btn {
+  background: var(--primary-action);
+  color: white;
+  margin-right: 8px;
+}
+
+.save-btn:hover {
+  background: var(--primary-action-hover);
+}
+
+.close-btn {
+  background: var(--secondary-action);
+  color: var(--text-secondary);
+}
+
+.close-btn:hover {
+  background: var(--secondary-action-hover);
+}
+
+/* Scrollbar Styling (Fixes the black bar) */
+.modal-content::-webkit-scrollbar,
+.results-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track,
+.results-list::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb,
+.results-list::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover,
+.results-list::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
