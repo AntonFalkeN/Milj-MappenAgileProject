@@ -52,7 +52,7 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
       });
       const res = await fetch(`${NOMINATIM_URL}?${params}`, {
         headers: {
-          'User-Agent': 'YourAppName/1.0 (your@email.com)',
+          'User-Agent': 'WasteWatchers/1.0',
         },
       });
       if (!res.ok) throw new Error('Request failed');
