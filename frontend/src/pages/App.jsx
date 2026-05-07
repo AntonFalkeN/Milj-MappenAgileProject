@@ -13,7 +13,10 @@ import Home from "./Home.jsx";
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
 function MapPage() {
-  const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState([
+    { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
+    { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
+  ]);
 
   const navigate = useNavigate();
   const onCreateAccount = () => {
