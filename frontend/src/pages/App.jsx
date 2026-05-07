@@ -13,10 +13,7 @@ import Home from "./Home.jsx";
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
 function MapPage() {
-  const [markers, setMarkers] = useState([
-    { id: "Johanneberg", lng: 11.97695, lat: 57.68962, title: "Campus Johanneberg", description: "Chalmers University of Technology (Johanneberg)" },
-    { id: "Lindholmen", lng: 11.936662797883773, lat: 57.70653055063925, title: "Campus Lindholmen", description: "Chalmers University of Technology (Lindholmen)" }
-  ]);
+  const [markers, setMarkers] = useState([]);
 
   const navigate = useNavigate();
   const onCreateAccount = () => {
@@ -43,40 +40,7 @@ function MapPage() {
       .then((response) => response.json())
       .then((data) => setMarkers(data))
       .catch((error) => console.error("Could not connect to backend:", error));
-  }, []);  
-
-  // add or remove markers
-  useEffect(() => {
-    console.log("MARKER FROM BACKEND: ", markers);
-    window.addMarker = (marker) => {
-      setMarkers((prev) => [...prev, marker]);
-      console.log("Marker added!", marker);
-    };
-
-    window.removeMarker = (id) => {
-      setMarkers((prev) => prev.filter((m) => m.id !== id));
-      console.log("Marker removed:", id);
-    };
-    return () => {
-      delete window.addMarker;
-      delete window.removeMarker;
-    };
   }, []);
-
-  async function deliverPin() { //take marker as parameter
-    console.log("Delivering pin:", testMarker);
-    const backendUrl = import.meta.env.VITE_API_URL;
-
-
-
-    const res = await fetch(`${backendUrl}/api/items`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(testMarker),
-    });
-    const data = await res.json();
-    console.log(data);
-  }
 
   return (
     <div>
@@ -101,7 +65,6 @@ function MapPage() {
         </ul>
       )} */}
       <MapComponent markers={markers} />
-      <button onClick={() => deliverPin()}> TEST</button>
       <BottomNav />
     </div>
   );

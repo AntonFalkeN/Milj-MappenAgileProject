@@ -18,11 +18,24 @@ function MapComponent({ markers }) {
       title: locationData.title,
       description: locationData.description,
     };
-    if (window.addMarker) {
-      window.addMarker(newMarker);
-    }
+    deliverPin(newMarker);
     setPopupOpen(false);
   };
+
+  async function deliverPin(marker) { //take marker as parameter
+    console.log("Delivering pin:", marker);
+    const backendUrl = import.meta.env.VITE_API_URL;
+
+
+
+    const res = await fetch(`${backendUrl}/api/items`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(marker),
+    });
+    const data = await res.json();
+    console.log(data);
+  }
 
 
   return (
