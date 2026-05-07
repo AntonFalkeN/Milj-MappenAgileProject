@@ -3,7 +3,7 @@ import Button from "../components/Button"; // Importera Button-komponenten
 import "./Home.css"; // Importera CSS för Home-sidan
 import Footer from "../components/Footer";
 import gitJavaImage from "../assets/gitJava.png";
-import PictureButton from "../components/pictureButton";
+import PictureButton from "../components/PictureButton";
 
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.

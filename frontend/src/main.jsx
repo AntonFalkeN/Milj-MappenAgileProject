@@ -8,7 +8,8 @@ import Home from './pages/App.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>      
-      <Home />
+      {/* <Home /> */}
+      <App></App>
     </BrowserRouter>    
   </StrictMode>,
 )
