@@ -1,0 +1,29 @@
+.pictureGridSection {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: 5.2rem;
+  padding-right: 10rem;
+}
+
+.pictureGridTitle {
+  color: #1f351f;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 700;
+  font-size: 2.6rem;
+  text-align: left;
+  padding-left: 1.5rem;
+  filter: drop-shadow(0 0.3rem 0.15rem rgba(0, 0, 0, 0.3));
+}
+
+.pictureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+  width: min(84vw, 30rem);
+  margin: 1.4rem auto 0;
+}
+
+.newListingsSection {
+  padding-top: 3rem;
+}

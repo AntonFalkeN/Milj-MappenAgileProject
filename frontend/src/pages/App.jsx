@@ -72,6 +72,7 @@ function MapPage() {
 
 export default function App() {
   return (
+    
     <Routes>
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/" element={<Home />}></Route>
