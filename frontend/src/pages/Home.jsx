@@ -3,13 +3,60 @@ import Button from "../components/Button"; // Importera Button-komponenten
 import "./Home.css"; // Importera CSS för Home-sidan
 import Footer from "../components/Footer";
 import gitJavaImage from "../assets/gitJava.png";
-import PictureButton from "../components/PictureButton";
+import PictureGridSection from "../components/PictureGridSection";
 
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.
 
+  const nearYouItems = [
+    {
+      id: 1,
+      imageSrc: gitJavaImage,
+      imageAlt: "Nearby listing",
+    },
+    {
+      id: 2,
+      imageSrc: gitJavaImage,
+      imageAlt: "Nearby listing",
+    },
+    {
+      id: 3,
+      imageSrc: gitJavaImage,
+      imageAlt: "Nearby listing",
+    },
+    {
+      id: 4,
+      imageSrc: gitJavaImage,
+      imageAlt: "Nearby listing",
+    },
+  ];
+
+  const newListingItems = [
+    {
+      id: 1,
+      imageSrc: gitJavaImage,
+      imageAlt: "New listing",
+    },
+    {
+      id: 2,
+      imageSrc: gitJavaImage,
+      imageAlt: "New listing",
+    },
+    {
+      id: 3,
+      imageSrc: gitJavaImage,
+      imageAlt: "New listing",
+    },
+    {
+      id: 4,
+      imageSrc: gitJavaImage,
+      imageAlt: "New listing",
+    },
+  ];
+
   return (
     <div className="homePage">
+
       <svg
         className="greenBackgroundShape"
         viewBox="0 0 440 1190"
@@ -144,18 +191,15 @@ const Home = () => {
           />
         </div>
 
-        <section className="nearYouSection">
-          <h2 className="nearYouTitle">Near You</h2>
+        <PictureGridSection title="Near You" items={nearYouItems} />
 
-          <div className="nearYouGrid">
-            <PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing" />
-            <PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing" />
-            <PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing" />
-            <PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing" />
-          </div>
+        <div className="homeSectionDivider" />
 
-          <div className="nearYouDivider" />
-        </section>
+        <PictureGridSection
+          title="New listings"
+          items={newListingItems}
+          sectionClassName="newListingsSection"
+        />
       </main>
 
       <Footer />
