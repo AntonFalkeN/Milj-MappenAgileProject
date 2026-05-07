@@ -1,4 +1,4 @@
-.home-page {
+.homePage {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -7,23 +7,23 @@
   background-color: rgb(255, 255, 255);
 }
 
-.home-content {
+.homeContent {
   position: relative;
   z-index: 1;
   flex: 1;
 }
 
-.home-header-svg {
+.homeHeaderSvg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.publish-button-wrapper {
+.publishButtonWrapper {
   margin-top: 2rem;
 }
 
-.green-background-shape {
+.greenBackgroundShape {
   position: absolute;
   top: 14.5rem;
   width: 100%;
@@ -32,7 +32,47 @@
   margin-top: 2rem;
 }
 
+.nearYouSection {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: 5.2rem;
+  padding-right: 10rem;
+}
+
+.nearYouTitle {
+  color: #1f351f;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 700;
+  font-size: 2.6rem;
+  text-align: left;
+  padding-left: 1.5rem;
+  filter: drop-shadow(0 0.3rem 0.15rem rgba(0, 0, 0, 0.3));
+  
+}
+
+.nearYouGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+  width: min(84vw, 30rem);
+  margin: 1.4rem auto 0;
+}
+
+.nearYouDivider {
+  width: 85%;
+  height: 0.8rem;
+  background-color: #698561;
+  opacity: 0.4;
+  margin: 1.8rem auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0.25rem 0.2rem rgba(0, 0, 0, 0.25);
+}
+
 .footer {
   position: relative;
   z-index: 1;
+  margin-top: 8rem;
 }
+
+

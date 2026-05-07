@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './PinPopup.css'; 
+import './PinPopup.css'; // this file should now contain the camelCase selectors
 
 const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
 
@@ -52,7 +52,7 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
       });
       const res = await fetch(`${NOMINATIM_URL}?${params}`, {
         headers: {
-          'User-Agent': 'WasteWatchers/1.0',
+          'User-Agent': 'WasteWatchersApp',
         },
       });
       if (!res.ok) throw new Error('Request failed');
@@ -90,8 +90,8 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <div className="modalOverlay" onClick={onClose}>
+      <div className="modalContent" onClick={(e) => e.stopPropagation()}>
         <h2>Add Location</h2>
 
         {!selected && (
@@ -101,19 +101,19 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
               placeholder="Search for an address…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="search-input"
+              className="searchInput"
               autoFocus
             />
-            {loading && <div className="info-text">Searching...</div>}
-            {error && <div className="error-text">{error}</div>}
+            {loading && <div className="infoText">Searching...</div>}
+            {error && <div className="errorText">{error}</div>}
 
             {results.length > 0 && (
-              <ul className="results-list">
+              <ul className="resultsList">
                 {results.map((item) => (
                   <li
                     key={item.place_id}
                     onClick={() => handleSelect(item)}
-                    className="result-item"
+                    className="resultItem"
                   >
                     {item.display_name}
                   </li>
@@ -123,9 +123,8 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
           </>
         )}
 
-        {/* Selected location info + custom fields */}
         {selected && (
-          <div className="selected-info">
+          <div className="selectedInfo">
             <p>
               <strong>Location:</strong> {selected.displayName}
             </p>
@@ -135,23 +134,23 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
               placeholder="Name of place (ex Johanneberg)"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="field-input"
+              className="fieldInput"
             />
             <textarea
               placeholder="Description (ex, 'press the bell on Port 3')"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="field-input"
+              className="fieldInput"
               rows={3}
             />
 
-            <button className="save-btn" onClick={handleSave}>
+            <button className="saveBtn" onClick={handleSave}>
               Save Location
             </button>
           </div>
         )}
 
-        <button className="close-btn" onClick={onClose}>
+        <button className="closeBtn" onClick={onClose}>
           Cancel
         </button>
       </div>
