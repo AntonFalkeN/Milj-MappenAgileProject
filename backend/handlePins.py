@@ -85,3 +85,42 @@ def getPins():
             cursor.close()
         if conn:
             conn.close()
+
+
+def removePinWithID(pinID):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        
+        cursor.execute("""
+            DELETE FROM Pins
+            WHERE id = %s
+            RETURNING id
+                       """, (pinID,))            
+        
+        removedID = cursor.fetchone()
+
+        conn.commit()
+
+        if removedID:
+            print(f"Removed pin with id: {removedID['id']}")
+
+        else:
+            print("No pin found with that ID")
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+
+
