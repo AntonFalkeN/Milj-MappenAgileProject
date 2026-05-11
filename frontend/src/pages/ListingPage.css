@@ -1,0 +1,32 @@
+.listingPage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100vh;
+  background-color: rgb(255, 255, 255);
+}
+
+.listingPageContent {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.listingPageHeaderSvg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.listingPageFormSection {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.5rem;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 8rem;
+}
