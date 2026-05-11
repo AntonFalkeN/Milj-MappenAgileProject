@@ -16,7 +16,38 @@
   font-size: 2rem;
 }
 
+.return-button {
+  background-color: #a8cf9d;
+  color: #1f351f;
+  border-radius: 12px;
+  padding: 0.7rem 3rem;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
 .login-button {
   background-color: purple;
   color: white;
+}
+
+
+.map-corner-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background: white;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  font-weight: 500;
+  color: black;
+}
+
+/* Optional: hover effect */
+.map-corner-top-right:hover {
+  background: #f0f0f0;
 } 

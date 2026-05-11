@@ -24,6 +24,14 @@ function MapPage() {
     navigate("/login");
   };
 
+      const testMarker = {
+      id: "TEST1234",
+      lng: 11.976,
+      lat: 57.68962,
+      title: "TESTMARKER",
+      description: "TESTTEASTTEST",
+    };
+
   // Fetch from backend
   useEffect(() => {
     // Vite uses import.meta.env to read your .env file securely
@@ -32,23 +40,6 @@ function MapPage() {
       .then((response) => response.json())
       .then((data) => setMarkers(data))
       .catch((error) => console.error("Could not connect to backend:", error));
-  }, []);  
-
-  // add or remove markers
-  useEffect(() => {
-    window.addMarker = (marker) => {
-      setMarkers((prev) => [...prev, marker]);
-      console.log("Marker added!", marker);
-    };
-
-    window.removeMarker = (id) => {
-      setMarkers((prev) => prev.filter((m) => m.id !== id));
-      console.log("Marker removed:", id);
-    };
-    return () => {
-      delete window.addMarker;
-      delete window.removeMarker;
-    };
   }, []);
 
   return (
@@ -80,14 +71,15 @@ function MapPage() {
 }
 
 export default function App() {
-    return (
+  return (
+    
     <Routes>
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/create-account" element={<CreateAccount />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/location/:id" element={<AnnouncementDetails />} />
-        <Route path="/map" element={<MapPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/create-account" element={<CreateAccount />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/location/:id" element={<AnnouncementDetails />} />
+      <Route path="/map" element={<MapPage />} />
     </Routes>
-    );
+  );
 }
