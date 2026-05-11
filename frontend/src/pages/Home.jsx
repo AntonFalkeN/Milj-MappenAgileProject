@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import gitJavaImage from "../assets/gitJava.png";
 import PictureGridSection from "../components/PictureGridSection";
 
+
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.
 
@@ -187,7 +188,7 @@ const Home = () => {
           <Button
             text="Publish"
             variant="publish-button"
-            onClick={() => navigate("/map")}
+            onClick={() => navigate("/listingPage")}
           />
         </div>
 

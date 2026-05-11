@@ -9,6 +9,7 @@ import Login from "./Login.jsx";
 import ProfilePage from "./ProfilePage.jsx";
 import BottomNav from "../components/BottomNav.jsx";
 import Home from "./Home.jsx";
+import ListingPage from "./ListingPage.jsx";
 
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
@@ -75,6 +76,7 @@ export default function App() {
     
     <Routes>
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/listingPage" element={<ListingPage />} />
       <Route path="/" element={<Home />}></Route>
       <Route path="/create-account" element={<CreateAccount />}></Route>
       <Route path="/login" element={<Login />}></Route>
