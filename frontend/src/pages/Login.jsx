@@ -1,5 +1,6 @@
 import "./CreateAccount.css"
 import {useState} from "react";
+import SearchGlass from "../components/SearchGlass.jsx"
 
 export default function CreateAccount() {
     const [name, setName] = useState("");

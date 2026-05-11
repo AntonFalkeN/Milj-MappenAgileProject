@@ -80,14 +80,14 @@ function MapPage() {
 }
 
 export default function App() {
-  return (
+    return (
     <Routes>
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/create-account" element={<CreateAccount />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/location/:id" element={<AnnouncementDetails />} />
-      <Route path="/map" element={<MapPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/create-account" element={<CreateAccount />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/location/:id" element={<AnnouncementDetails />} />
+        <Route path="/map" element={<MapPage />} />
     </Routes>
-  );
+    );
 }

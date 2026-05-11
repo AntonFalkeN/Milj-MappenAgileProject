@@ -1,0 +1,30 @@
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-container input {
+    width: 0;
+    opacity: 0;
+
+    transition:
+        width 0.3s ease,
+        opacity 0.2s ease;
+
+    border: none;
+    outline: none;
+
+    padding: 10px 0;
+}
+
+.search-container.open input {
+    width: 180px;
+    opacity: 1;
+
+    padding: 10px;
+}
+
+.search-btn {
+    flex-shrink: 0;
+}
