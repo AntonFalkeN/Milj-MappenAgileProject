@@ -1,20 +1,35 @@
-<div className="SearchGlass">
-    <div className={`search-container ${open ? "open" : ""}`}>
+import { useState } from "react";
 
+const SearchGlass = () => {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+    console.log(search);
+    }
+  };
+
+  return (
+    <div className="SearchGlass">
+      <div className={`search-container ${open ? "open" : ""}`}>
         <input
-            type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onKeyDown={handleKeyDown}
+          type="text"
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
 
         <button
-            className="search-btn"
-            onClick={() => setOpen(!open)}
+          className="search-btn"
+          onClick={() => setOpen(!open)}
         >
-            🔍
+          🔍
         </button>
-
+      </div>
     </div>
-</div>
+  );
+};
+
+export default SearchGlass;

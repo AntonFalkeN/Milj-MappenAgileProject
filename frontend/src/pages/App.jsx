@@ -9,7 +9,6 @@ import Login from "./Login.jsx";
 import ProfilePage from "./ProfilePage.jsx";
 import BottomNav from "../components/BottomNav.jsx";
 import Home from "./Home.jsx";
-
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
 function MapPage() {
@@ -72,14 +71,17 @@ function MapPage() {
 
 export default function App() {
   return (
-    
-    <Routes>
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/create-account" element={<CreateAccount />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/location/:id" element={<AnnouncementDetails />} />
-      <Route path="/map" element={<MapPage />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/location/:id" element={<AnnouncementDetails />} />
+        <Route path="/map" element={<MapPage />} />
+      </Routes>
+
+      <BottomNav />
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import ReturnButton from "../components/ReturnButton";
 import { useState } from "react";
-import "./CreateAccount.css"
+import "./CreateAccount.css";
+import SearchGlass from "../components/SearchGlass.jsx";
 
 
 export default function CreateAccount() {

@@ -22,7 +22,7 @@ export default function BottomNav() {
         </span>
 
         <span
-        className={location.pathname === "/profile" ? "active" : ""}
+        className={location.pathname === "/ProfilePage" ? "active" : ""}
         onClick={() => navigate("/profile")}
         >
         👤
