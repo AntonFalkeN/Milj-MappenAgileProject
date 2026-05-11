@@ -1,17 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
-import './PinPopup.css'; // this file should now contain the camelCase selectors
+import './PinPopup.css';
 
 const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
 
 export default function AddressPopup({ isOpen, onClose, onSave }) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const debounceRef = useRef(null);
+
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [selected, setSelected] = useState(null);
   const [title, setTitle] = useState('');
+  const [PickupTime, setPickupTime] = useState('');
+  const [category, setcategory] = useState('');
   const [description, setDescription] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const debounceRef = useRef(null);
 
   // Reset all fields when the popup opens
   useEffect(() => {
