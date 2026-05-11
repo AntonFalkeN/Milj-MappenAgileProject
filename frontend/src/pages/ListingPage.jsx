@@ -1,14 +1,34 @@
+import { useState } from "react";
 import "./ListingPage.css";
 import Footer from "../components/Footer";
 
 const ListingPage = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const categoryOptions = [
+    { label: "Plastic bottles", value: "plasticBottles" },
+    { label: "Cans", value: "cans" },
+    { label: "Other recycling", value: "otherRecycling" },
+  ];
+
+  const handleSubmit = () => {
+    if (!selectedCategory) {
+      console.log("No category selected");
+      return;
+    }
+
+    const pickupData = {
+      category: selectedCategory.value,
+    };
+
+    console.log(pickupData);
+  };
   return (
     <div className="listingPage">
       <main className="listingPageContent">
-        {/* Lägg in din nya SVG från Figma här */}
         <svg
-          width="440"
-          height="140"
+          className="listingPageHeaderSvg"
           viewBox="0 0 440 140"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +142,53 @@ const ListingPage = () => {
         </svg>
 
         <section className="listingPageFormSection">
-          {/* Här bygger vi själva Create Pickup-formuläret senare */}
+          <div className="listingDropdown">
+            <button
+              className="listingDropdownButton"
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <span
+                className={
+                  selectedCategory
+                    ? "listingDropdownText selected"
+                    : "listingDropdownText"
+                }
+              >
+                {selectedCategory ? selectedCategory.label : "Select item"}
+              </span>
+
+              <span
+                className={
+                  isDropdownOpen
+                    ? "listingDropdownArrow open"
+                    : "listingDropdownArrow"
+                }
+              >
+                ⌄
+              </span>
+            </button>
+
+            {isDropdownOpen && (
+              <div className="listingDropdownMenu">
+                {categoryOptions.map((categoryOption) => (
+                  <button
+                    key={categoryOption.value}
+                    className="listingDropdownOption"
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory(categoryOption);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    {categoryOption.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          
         </section>
       </main>
 

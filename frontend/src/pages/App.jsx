@@ -25,13 +25,13 @@ function MapPage() {
     navigate("/login");
   };
 
-      const testMarker = {
-      id: "TEST1234",
-      lng: 11.976,
-      lat: 57.68962,
-      title: "TESTMARKER",
-      description: "TESTTEASTTEST",
-    };
+  const testMarker = {
+    id: "TEST1234",
+    lng: 11.976,
+    lat: 57.68962,
+    title: "TESTMARKER",
+    description: "TESTTEASTTEST",
+  };
 
   // Fetch from backend
   useEffect(() => {
@@ -73,7 +73,6 @@ function MapPage() {
 
 export default function App() {
   return (
-    
     <Routes>
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/listingPage" element={<ListingPage />} />
