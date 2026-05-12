@@ -1,14 +1,109 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from 'react';
 import "./ListingPage.css";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 
+const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
+
 const ListingPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const debounceRef = useRef(null);
+  const skipNextChange = useRef(false);
+  
+  const [category, setcategory] = useState('');
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [location, setLocation] = useState(null);
+  const [description, setDescription] = useState('');
+  const [PickupTime, setPickupTime] = useState('');
+  
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [pickupDuration, setPickupDuration] = useState("");
+
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults([]);
+      return;
+    }
+
+    if (skipNextChange.current) {
+      skipNextChange.current = false;
+      return;
+    }
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(() => {
+      searchAddress(query);
+    }, 400);
+
+    return () => clearTimeout(debounceRef.current);
+  }, [query]);
+
+  const searchAddress = async (q) => {
+    setLocation({
+      lat: "",
+      lng: "",
+      title: ""
+    });
+
+    setLoading(true);
+    setError('');
+    try {
+      const params = new URLSearchParams({
+        q,
+        format: 'json',
+        addressdetails: 1,
+        limit: 5,
+      });
+      const res = await fetch(`${NOMINATIM_URL}?${params}`, {
+        headers: {
+          'User-Agent': 'WasteWatchersApp',
+        },
+      });
+      if (!res.ok) throw new Error('Request failed');
+      const data = await res.json();
+      setResults(data);
+    } catch (err) {
+      setError('Search failed. Please try again.');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSelect = (item) => {
+    skipNextChange.current = true;  
+    const isNumber = (value) => !isNaN(parseFloat(value)) && isFinite(value);
+    const split = item.display_name.split(',');
+    var title;
+    if (isNumber(split[0])) {
+      title = split[1] + " " + split[0];
+    }
+    else {
+      title = split[0];
+    }
+    setQuery(title);
+    setLocation({
+      lat: parseFloat(item.lat),
+      lng: parseFloat(item.lon),
+      title: title
+    });
+    setResults([]);
+  };
+
+  const handleSave = () => {
+    if (!selected) return;
+    onSave({
+      lat: selected.lat,
+      lng: selected.lng,
+      title: query.trim(),
+      description: description.trim(),
+    });
+  };
+
 
   const categoryOptions = [
     { label: "Plastic bottles", value: "plasticBottles" },
@@ -24,13 +119,14 @@ const ListingPage = () => {
     { label: "24 hours", value: 24 },
   ];
 
+  
   const handleSubmit = () => {
     if (!selectedCategory) {
       console.log("No category selected");
       return;
     }
 
-    if (!title.trim()) {
+    if (!query.trim()) {
       console.log("No title/address entered");
       return;
     }
@@ -46,19 +142,19 @@ const ListingPage = () => {
     }
 
     const firstPickupTime = new Date();
-
     const lastPickupTime = new Date(
       firstPickupTime.getTime() + Number(pickupDuration) * 60 * 60 * 1000,
     );
 
     const pickupData = {
-      category: selectedCategory.value,
-      title: title,
+      id: "TEMP",
+      title: query,
+      lng: "",
+      lat: "",
       description: description,
-      pickupTime: {
-        first: firstPickupTime.toISOString(),
-        last: lastPickupTime.toISOString(),
-      },
+      category: selectedCategory.value,
+      startTime: firstPickupTime.toISOString(),
+      endTime: lastPickupTime.toISOString(),
     };
 
     console.log(pickupData);
@@ -233,9 +329,26 @@ const ListingPage = () => {
               className="listingTextInput"
               type="text"
               placeholder="Address"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              autoFocus
             />
+            {loading && <div className="infoText">Searching...</div>}
+            {error && <div className="errorText">{error}</div>}
+
+            {results.length > 0 && (
+              <ul className="resultsList">
+                {results.map((item) => (
+                  <li
+                    key={item.place_id}
+                    onClick={() => handleSelect(item)}
+                    className="resultItem"
+                  >
+                    {item.display_name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className="listingTextInputWrapper">

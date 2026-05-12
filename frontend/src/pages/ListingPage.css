@@ -1,3 +1,29 @@
+:root {
+  --modalBg: #ffffff;
+  --overlayBg: rgba(0, 0, 0, 0.4);
+  --primaryAction: #2b6cb0;
+  --primaryActionHover: #1e4e8c;
+  --secondaryAction: #e0e0e0;
+  --secondaryActionHover: #cccccc;
+  
+  --fontFamily: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --textMain: #323232;
+  --textSecondary: #646464;
+  --textMuted: #999999;
+  --textError: #b00020;
+  
+  --borderLight: #cccccc;
+  --borderDivider: #eeeeee;
+  --hoverBg: #f5f5f5;
+  
+  --scrollbarTrack: #f1f1f1;
+  --scrollbarThumb: #cccccc;
+  --scrollbarThumbHover: #aaaaaa;
+}
+
+
+
+
 .listingPage {
   position: relative;
   display: flex;
@@ -169,4 +195,70 @@
 
 .listingPage .publishButtonWrapper {
   margin-top: 2rem;
+}
+
+
+
+
+
+.resultsList {
+  list-style: none;
+  margin: 0 0 10px 0;
+  padding: 0;
+  border: 1px solid var(--borderLight);
+  border-radius: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.resultItem {
+  padding: 10px;
+  cursor: pointer;
+  color: var(--textSecondary);
+  border-bottom: 1px solid var(--borderDivider);
+}
+
+.resultItem:last-child {
+  border-bottom: none;
+}
+
+.resultItem:hover {
+  background: var(--hoverBg);
+}
+
+
+/* Scrollbar */
+.modalContent::-webkit-scrollbar,
+.resultsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-track,
+.resultsList::-webkit-scrollbar-track {
+  background: var(--scrollbarTrack);
+  border-radius: 10px;
+}
+
+.modalContent::-webkit-scrollbar-thumb,
+.resultsList::-webkit-scrollbar-thumb {
+  background: var(--scrollbarThumb);
+  border-radius: 10px;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover,
+.resultsList::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbarThumbHover);
+}
+
+
+.infoText {
+  color: var(--textSecondary);
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+.errorText {
+  color: var(--textError);
+  font-size: 0.9rem;
+  margin: 4px 0;
 }

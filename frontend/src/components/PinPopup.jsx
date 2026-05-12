@@ -104,7 +104,7 @@ export default function AddressPopup({ isOpen, onClose, onSave }) {
               placeholder="Search for an address…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="searchInput"
+              className="searchInput" 
               autoFocus
             />
             {loading && <div className="infoText">Searching...</div>}
