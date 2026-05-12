@@ -1,15 +1,27 @@
 import { useState } from "react";
 import "./ListingPage.css";
 import Footer from "../components/Footer";
+import Button from "../components/Button";
 
 const ListingPage = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [pickupDuration, setPickupDuration] = useState("");
 
   const categoryOptions = [
     { label: "Plastic bottles", value: "plasticBottles" },
     { label: "Cans", value: "cans" },
     { label: "Other recycling", value: "otherRecycling" },
+  ];
+
+  const pickupDurationOptions = [
+    { label: "1 hour", value: 1 },
+    { label: "3 hours", value: 3 },
+    { label: "6 hours", value: 6 },
+    { label: "12 hours", value: 12 },
+    { label: "24 hours", value: 24 },
   ];
 
   const handleSubmit = () => {
@@ -18,12 +30,40 @@ const ListingPage = () => {
       return;
     }
 
+    if (!title.trim()) {
+      console.log("No title/address entered");
+      return;
+    }
+
+    if (!description.trim()) {
+      console.log("No description entered");
+      return;
+    }
+
+    if (!pickupDuration) {
+      console.log("No pickup duration selected");
+      return;
+    }
+
+    const firstPickupTime = new Date();
+
+    const lastPickupTime = new Date(
+      firstPickupTime.getTime() + Number(pickupDuration) * 60 * 60 * 1000,
+    );
+
     const pickupData = {
       category: selectedCategory.value,
+      title: title,
+      description: description,
+      pickupTime: {
+        first: firstPickupTime.toISOString(),
+        last: lastPickupTime.toISOString(),
+      },
     };
 
     console.log(pickupData);
   };
+
   return (
     <div className="listingPage">
       <main className="listingPageContent">
@@ -188,7 +228,50 @@ const ListingPage = () => {
             )}
           </div>
 
-          
+          <div className="listingTextInputWrapper">
+            <input
+              className="listingTextInput"
+              type="text"
+              placeholder="Address"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+          </div>
+
+          <div className="listingTextInputWrapper">
+            <textarea
+              className="listingDescriptionInput"
+              placeholder="Description"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+            />
+          </div>
+
+          <div className="listingTextInputWrapper">
+            <select
+              className="listingTextInput"
+              value={pickupDuration}
+              onChange={(event) => setPickupDuration(event.target.value)}
+            >
+              <option value="" disabled>
+                Available for
+              </option>
+
+              {pickupDurationOptions.map((durationOption) => (
+                <option key={durationOption.value} value={durationOption.value}>
+                  {durationOption.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="publishButtonWrapper">
+            <Button
+              text="Publish"
+              variant="publish-button"
+              onClick={handleSubmit}
+            />
+          </div>
         </section>
       </main>
 

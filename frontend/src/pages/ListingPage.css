@@ -33,13 +33,13 @@
 
 .listingDropdown {
   position: relative;
-  width: min(86vw, 31rem);
+  width: min(78vw, 26rem);
   margin: 0 auto;
 }
 
 .listingDropdownButton {
-  width: 100%;
-  height: 7.2rem;
+  width: 80%;
+  height: 5.2rem;
   border: 0.18rem solid #1f351f;
   border-radius: 1rem;
   background-color: #f8faf7;
@@ -100,4 +100,73 @@
 
 .listingDropdownOption:hover {
   background-color: rgba(31, 53, 31, 0.08);
+}
+
+.listingTextInputWrapper {
+  width: min(86vw, 31rem);
+  margin: 1.4rem auto 0;
+}
+
+.listingTextInput {
+  width: 100%;
+  height: 4.2rem;
+  border: 0.18rem solid #1f351f;
+  border-radius: 1rem;
+  background-color: #f8faf7;
+  padding: 0 1.5rem;
+  color: #1f351f;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.listingTextInput::placeholder {
+  color: #6f7970;
+}
+
+.listingTextInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(31, 53, 31, 0.18);
+}
+
+.listingPublishButton {
+  display: block;
+  width: min(86vw, 31rem);
+  height: 4.2rem;
+  margin: 1.6rem auto 0;
+  border: none;
+  border-radius: 1rem;
+  background-color: #1f351f;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.listingDescriptionInput {
+  width: 100%;
+  min-height: 8rem;
+  border: 0.18rem solid #1f351f;
+  border-radius: 1rem;
+  background-color: #f8faf7;
+  padding: 1.2rem 1.5rem;
+  color: #1f351f;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.listingDescriptionInput::placeholder {
+  color: #6f7970;
+}
+
+.listingDescriptionInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(31, 53, 31, 0.18);
+}
+
+.listingPage .publishButtonWrapper {
+  margin-top: 2rem;
 }
