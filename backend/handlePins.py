@@ -8,7 +8,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-def insertPin(id, lng, lat, title, description, category, pickuptime):
+def insertPin(lng, lat, title, description, category, starts_time, ends_time):
     conn = None
     cursor = None
 
@@ -20,22 +20,23 @@ def insertPin(id, lng, lat, title, description, category, pickuptime):
         # Create table if it doesn't exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Pins (
-                id TEXT PRIMARY KEY,
+                id SERIAL PRIMARY KEY,
+                title TEXT NOT NULL,
                 lng REAL NOT NULL,
                 lat REAL NOT NULL,
-                title TEXT NOT NULL,
                 description TEXT NOT NULL,
                 category TEXT NOT NULL,
-                pickuptime TEXT
+                start_time TEXT NOT NULL,
+                ends_time TEXT NOT NULL
             );
         """)
 
         # Insert user
         cursor.execute("""
-            INSERT INTO Pins (id, lng, lat, title, description, category, pickuptime)
+            INSERT INTO Pins (id, lng, lat, title, description, category, starts_time, ends_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
-        """, (id, lng, lat, title, description, category, pickuptime))
+        """, (title, lng, lat, description, category, starts_time, ends_time))
 
         inserted_id = cursor.fetchone()[0]
         print()
@@ -66,7 +67,7 @@ def getPins():
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, lng, lat, title, description, category, pickuptime
+            SELECT id, title, lng, lat, description, category, starts_time, ends_time
             FROM Pins
                        """)            
         
@@ -136,7 +137,7 @@ def getPinsFromCategory(category):
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, lng, lat, title, description, category, pickuptime
+            SELECT id, title, lng, lat, description, category, starts_time, ends_time
             FROM Pins
             WHERE category = %s
                        """, (category,))            
@@ -160,7 +161,7 @@ def getPinsFromCategory(category):
         if conn:
             conn.close()
 
-def getPinsFromDistance(coordinates, distance):
+def getPinsFromDistance(coordinates, distance): #Coordinated as (lat, lng) tuple and distance as int in km
     conn = None
     cursor = None
 
@@ -171,7 +172,7 @@ def getPinsFromDistance(coordinates, distance):
 
 
         cursor.execute("""
-            SELECT id, lng, lat, title, description, category, pickuptime
+            SELECT id, title, lng, lat, description, category, starts_time, ends_time
             FROM Pins
                        """)            
         
@@ -205,6 +206,3 @@ def getPinsFromDistance(coordinates, distance):
             conn.close()
 
 
-
-getPins()
-getPinsFromDistance((57.609840, 12.064180), 1)
