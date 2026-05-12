@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
 from dotenv import load_dotenv
+import geopy.distance
 
 load_dotenv()
 
@@ -25,7 +26,7 @@ def insertPin(id, lng, lat, title, description, category, pickuptime):
                 title TEXT NOT NULL,
                 description TEXT NOT NULL,
                 category TEXT NOT NULL,
-                pickuptime TEXT,
+                pickuptime TEXT
             );
         """)
 
@@ -138,7 +139,7 @@ def getPinsFromCategory(category):
             SELECT id, lng, lat, title, description, category, pickuptime
             FROM Pins
             WHERE category = %s
-                       """, (category))            
+                       """, (category,))            
         
         pin = cursor.fetchall()                
 
@@ -158,3 +159,52 @@ def getPinsFromCategory(category):
             cursor.close()
         if conn:
             conn.close()
+
+def getPinsFromDistance(coordinates, distance):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+
+        cursor.execute("""
+            SELECT id, lng, lat, title, description, category, pickuptime
+            FROM Pins
+                       """)            
+        
+        pins = cursor.fetchall()                
+
+        nearby_pins = []
+
+        for pin in pins:
+            pin_coordinates = (pin["lat"], pin["lng"])
+            distance_km = geopy.distance.distance(coordinates, pin_coordinates).km
+
+            if distance_km <= distance:
+                nearby_pins.append(pin)
+
+
+        if nearby_pins:
+            print("Nearby Pins found", nearby_pins)
+            return nearby_pins
+
+        else:
+            print("No pins found")
+            return None
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+
+getPins()
+getPinsFromDistance((57.609840, 12.064180), 1)
