@@ -6,22 +6,36 @@ import Button from "../components/Button";
 const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
 
 const ListingPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const debounceRef = useRef(null);
-  const skipNextChange = useRef(false);
-  
-  const [category, setcategory] = useState('');
-  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const skipNextChange = useRef(false);
   const [location, setLocation] = useState(null);
   const [description, setDescription] = useState('');
   const [PickupTime, setPickupTime] = useState('');
   
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const [pickupDuration, setPickupDuration] = useState("");
 
+  const categoryOptions = [
+    { label: "Plastic bottles", value: "plasticBottles" },
+    { label: "Cans", value: "cans" },
+    { label: "Other recycling", value: "otherRecycling" },
+  ];
+
+  const pickupDurationOptions = [
+    { label: "1 hour", value: 1 },
+    { label: "3 hours", value: 3 },
+    { label: "6 hours", value: 6 },
+    { label: "12 hours", value: 12 },
+    { label: "24 hours", value: 24 },
+  ];
+
+
+  // happenes when the query updates
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
@@ -33,6 +47,12 @@ const ListingPage = () => {
       return;
     }
 
+    setLocation({
+      lat: "",
+      lng: "",
+      title: ""
+    });
+
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     debounceRef.current = setTimeout(() => {
@@ -43,12 +63,6 @@ const ListingPage = () => {
   }, [query]);
 
   const searchAddress = async (q) => {
-    setLocation({
-      lat: "",
-      lng: "",
-      title: ""
-    });
-
     setLoading(true);
     setError('');
     try {
@@ -94,40 +108,19 @@ const ListingPage = () => {
     setResults([]);
   };
 
-  const handleSave = () => {
-    if (!selected) return;
-    onSave({
-      lat: selected.lat,
-      lng: selected.lng,
-      title: query.trim(),
-      description: description.trim(),
-    });
-  };
-
-
-  const categoryOptions = [
-    { label: "Plastic bottles", value: "plasticBottles" },
-    { label: "Cans", value: "cans" },
-    { label: "Other recycling", value: "otherRecycling" },
-  ];
-
-  const pickupDurationOptions = [
-    { label: "1 hour", value: 1 },
-    { label: "3 hours", value: 3 },
-    { label: "6 hours", value: 6 },
-    { label: "12 hours", value: 12 },
-    { label: "24 hours", value: 24 },
-  ];
-
-  
   const handleSubmit = () => {
     if (!selectedCategory) {
       console.log("No category selected");
       return;
     }
 
-    if (!query.trim()) {
-      console.log("No title/address entered");
+    if (!location.title.trim()) {
+      console.log("No address selected");
+      return;
+    }
+
+    if (!location.lng || !location.lat) {
+      console.log("There was an error with the address");
       return;
     }
 
@@ -148,10 +141,10 @@ const ListingPage = () => {
 
     const pickupData = {
       id: "TEMP",
-      title: query,
-      lng: "",
-      lat: "",
-      description: description,
+      title: location.title,
+      lng: location.lng,
+      lat: location.lat,
+      description: description.trim(),
       category: selectedCategory.value,
       startTime: firstPickupTime.toISOString(),
       endTime: lastPickupTime.toISOString(),
@@ -159,6 +152,7 @@ const ListingPage = () => {
 
     console.log(pickupData);
   };
+
 
   return (
     <div className="listingPage">
