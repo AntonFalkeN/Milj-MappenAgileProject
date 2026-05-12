@@ -12,7 +12,7 @@ function MapComponent({ markers }) {
   const handleSave = (locationData) => {
     // add to backend here
     const newMarker = {
-      id: Date.now().toString(),
+      id: Date.now().toString(), //potentially generate ids like "username;number;timestamp" to avoid collisions and be able to remove easier
       lat: locationData.lat,
       lng: locationData.lng,
       title: locationData.title,
@@ -45,10 +45,13 @@ function MapComponent({ markers }) {
         initialViewState={{
           longitude: 11.97695,
           latitude: 57.68962,
-          zoom: 14
+          zoom: 14,
+          pitch: 0,
+          bearing: 0,
         }}
         style={{ height: '100%' }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
+        pitchWithRotate={false}
       >
         {markers.map(m => (
           <Marker key={m.id} longitude={m.lng} latitude={m.lat} anchor="bottom">

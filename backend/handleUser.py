@@ -20,7 +20,7 @@ def insertUser(name, password):
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Users (
                 id SERIAL PRIMARY KEY,
-                name TEXT NOT NULL,
+                name TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
@@ -85,3 +85,38 @@ def getUserFromID(userID):
             cursor.close()
         if conn:
             conn.close()
+
+def removeUserWithID(userID):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        
+        cursor.execute("""
+            DELETE FROM users
+            WHERE id = %s
+            RETURNING id
+                       """, (userID,))            
+        
+        removedID = cursor.fetchone()
+
+        conn.commit()
+
+        if removedID:
+            print(f"Removed user with id: {removedID['id']}")
+
+        else:
+            print("No user found with that ID")
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
