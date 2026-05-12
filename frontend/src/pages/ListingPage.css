@@ -23,6 +23,9 @@
   position: relative;
   z-index: 1;
   padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .listingPage .footer {
@@ -33,29 +36,35 @@
 
 .listingDropdown {
   position: relative;
-  width: min(78vw, 26rem);
-  margin: 0 auto;
+  width: min(58vw, 26rem);
 }
 
 .listingDropdownButton {
-  width: 80%;
-  height: 5.2rem;
+  width: 100%;
+  height: 4.2rem;
   border: 0.18rem solid #1f351f;
   border-radius: 1rem;
   background-color: #f8faf7;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 3rem;
+  padding: 0 1.1rem;
   cursor: pointer;
+}
+
+.listingDropdownButton.open {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .listingDropdownText {
   color: #6f7970;
   font-family: "Oleo Script Swash Caps", cursive;
-  font-size: 2.1rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.08rem;
+  white-space: nowrap;
 }
 
 .listingDropdownText.selected {
@@ -63,39 +72,51 @@
 }
 
 .listingDropdownArrow {
-  color: black;
-  font-size: 3rem;
-  line-height: 1;
-  transform: translateY(-0.2rem);
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
 .listingDropdownArrow.open {
-  transform: rotate(180deg) translateY(0.2rem);
+  transform: rotate(180deg);
 }
 
 .listingDropdownMenu {
   position: absolute;
-  top: calc(100% + 0.4rem);
+  top: 100%;
   left: 0;
   width: 100%;
   background-color: #f8faf7;
-  border: 0.18rem solid #1f351f;
-  border-radius: 1rem;
+  border-left: 0.18rem solid #1f351f;
+  border-right: 0.18rem solid #1f351f;
+  border-bottom: 0.18rem solid #1f351f;
+  border-top: none;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
   overflow: hidden;
   z-index: 10;
+  box-sizing: border-box;
+  animation: dropdownOpen 0.2s ease;
+  transform-origin: top;
 }
 
 .listingDropdownOption {
   width: 100%;
-  padding: 1.2rem 3rem;
+  padding: 0.3rem 1.2rem;
   border: none;
   background-color: transparent;
   color: #1f351f;
   font-family: "Oleo Script Swash Caps", cursive;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-align: left;
   cursor: pointer;
+}
+
+.listingDropdownOption:first-child {
+  padding-top: 0rem;
 }
 
 .listingDropdownOption:hover {
@@ -127,6 +148,10 @@
 .listingTextInput:focus {
   outline: none;
   box-shadow: 0 0 0 0.15rem rgba(31, 53, 31, 0.18);
+}
+
+.timeDropdown {
+  margin-top: 1.4rem;
 }
 
 .listingPublishButton {
@@ -169,4 +194,16 @@
 
 .listingPage .publishButtonWrapper {
   margin-top: 2rem;
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: scaleY(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
