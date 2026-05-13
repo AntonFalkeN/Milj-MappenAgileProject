@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
 from dotenv import load_dotenv
-import geopy.distance
+#import geopy.distance
 
 load_dotenv()
 
@@ -182,7 +182,7 @@ def getPinsFromDistance(coordinates, distance):
 
         for pin in pins:
             pin_coordinates = (pin["lat"], pin["lng"])
-            distance_km = geopy.distance.distance(coordinates, pin_coordinates).km
+            distance_km = 0 #geopy.distance.distance(coordinates, pin_coordinates).km
 
             if distance_km <= distance:
                 nearby_pins.append(pin)

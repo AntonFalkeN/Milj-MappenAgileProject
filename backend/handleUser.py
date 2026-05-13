@@ -136,7 +136,7 @@ def getUserFromName(username):
             WHERE name = %s;
             """, (username,))
         
-        user = cursor.fetchall()                
+        user = cursor.fetchone()                
 
         if user:
             print("User found", user)
