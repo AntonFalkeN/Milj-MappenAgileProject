@@ -8,7 +8,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-def insertPin(lng, lat, title, description, category, starts_time, ends_time):
+def insertPin(id, lng, lat, title, description, category, starts_time, ends_time):
     conn = None
     cursor = None
 
@@ -20,23 +20,23 @@ def insertPin(lng, lat, title, description, category, starts_time, ends_time):
         # Create table if it doesn't exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Pins (
-                id SERIAL PRIMARY KEY,
+                id PRIMARY KEY,
                 title TEXT NOT NULL,
                 lng REAL NOT NULL,
                 lat REAL NOT NULL,
                 description TEXT NOT NULL,
                 category TEXT NOT NULL,
-                start_time TEXT NOT NULL,
-                ends_time TEXT NOT NULL
+                start_time TIMESTAMP NOT NULL,
+                ends_time TIMESTAMP NOT NULL
             );
         """)
 
         # Insert user
         cursor.execute("""
             INSERT INTO Pins (id, lng, lat, title, description, category, starts_time, ends_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
-        """, (title, lng, lat, description, category, starts_time, ends_time))
+        """, (id, title, lng, lat, description, category, starts_time, ends_time))
 
         inserted_id = cursor.fetchone()[0]
         print()
@@ -161,7 +161,7 @@ def getPinsFromCategory(category):
         if conn:
             conn.close()
 
-def getPinsFromDistance(coordinates, distance): #Coordinated as (lat, lng) tuple and distance as int in km
+def getPinsFromDistance(coordinates, distance): #Coordinates as (lat, lng) tuple and distance as int in km
     conn = None
     cursor = None
 
