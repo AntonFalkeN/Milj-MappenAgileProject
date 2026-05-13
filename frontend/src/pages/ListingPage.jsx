@@ -19,6 +19,7 @@ const ListingPage = () => {
   
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [pickupDuration, setPickupDuration] = useState("");
+  const [isTimeDropdownOpen, setIsTimeDropdownOpen] = useState(false);
 
   const categoryOptions = [
     { label: "Plastic bottles", value: "plasticBottles" },
@@ -274,7 +275,11 @@ const ListingPage = () => {
         <section className="listingPageFormSection">
           <div className="listingDropdown">
             <button
-              className="listingDropdownButton"
+              className={
+                isDropdownOpen
+                  ? "listingDropdownButton open"
+                  : "listingDropdownButton"
+              }
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
@@ -288,15 +293,24 @@ const ListingPage = () => {
                 {selectedCategory ? selectedCategory.label : "Select item"}
               </span>
 
-              <span
+              <svg
                 className={
                   isDropdownOpen
                     ? "listingDropdownArrow open"
                     : "listingDropdownArrow"
                 }
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                ⌄
-              </span>
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="#1f351f"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </button>
 
             {isDropdownOpen && (
@@ -354,22 +368,68 @@ const ListingPage = () => {
             />
           </div>
 
-          <div className="listingTextInputWrapper">
-            <select
-              className="listingTextInput"
-              value={pickupDuration}
-              onChange={(event) => setPickupDuration(event.target.value)}
+          <div className="listingDropdown timeDropdown">
+            <button
+              className={
+                isTimeDropdownOpen
+                  ? "listingDropdownButton open"
+                  : "listingDropdownButton"
+              }
+              type="button"
+              onClick={() => setIsTimeDropdownOpen(!isTimeDropdownOpen)}
             >
-              <option value="" disabled>
-                Available for
-              </option>
+              <span
+                className={
+                  pickupDuration
+                    ? "listingDropdownText selected"
+                    : "listingDropdownText"
+                }
+              >
+                {pickupDuration
+                  ? pickupDurationOptions.find(
+                      (durationOption) =>
+                        String(durationOption.value) === String(pickupDuration),
+                    )?.label
+                  : "Available for"}
+              </span>
 
-              {pickupDurationOptions.map((durationOption) => (
-                <option key={durationOption.value} value={durationOption.value}>
-                  {durationOption.label}
-                </option>
-              ))}
-            </select>
+              <svg
+                className={
+                  isTimeDropdownOpen
+                    ? "listingDropdownArrow open"
+                    : "listingDropdownArrow"
+                }
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 9L12 15L18 9"
+                  stroke="#1f351f"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            {isTimeDropdownOpen && (
+              <div className="listingDropdownMenu">
+                {pickupDurationOptions.map((durationOption) => (
+                  <button
+                    key={durationOption.value}
+                    className="listingDropdownOption"
+                    type="button"
+                    onClick={() => {
+                      setPickupDuration(durationOption.value);
+                      setIsTimeDropdownOpen(false);
+                    }}
+                  >
+                    {durationOption.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="publishButtonWrapper">
