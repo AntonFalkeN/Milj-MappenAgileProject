@@ -64,7 +64,6 @@ function MapPage() {
         </ul>
       )} */}
       <MapComponent markers={markers} />
-      <BottomNav />
     </div>
   );
 }
@@ -81,7 +80,6 @@ export default function App() {
         <Route path="/map" element={<MapPage />} />
       </Routes>
 
-      <BottomNav />
-    </>
+      </>
   );
 }

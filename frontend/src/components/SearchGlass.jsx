@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./SearchGlass.css";
 
 const SearchGlass = () => {
   const [open, setOpen] = useState(false);

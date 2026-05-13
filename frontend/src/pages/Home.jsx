@@ -91,8 +91,6 @@ const Home = () => {
           sectionClassName="newListingsSection"
         />
       </main>
-      <BottomNav/>
-
       <Footer />
     </div>
   );

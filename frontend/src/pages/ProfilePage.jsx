@@ -5,11 +5,7 @@ import BottomNav from "../components/BottomNav.jsx";
 export default function ProfilePage() {
   return (
     <div className="page">
-      {/* HEADER */}
-      <div className="header">
-        <h1>Profile</h1>
-        <div className="avatar-icon"></div>
-      </div>
+      
 
       {/* CONTENT */}
       <div className="content">
@@ -28,7 +24,6 @@ export default function ProfilePage() {
             Example, pick up pant baskets at Kroksslätts Parkgata 29
           </div>
         </div>
-        <BottomNav />
       </div>
     </div>
   );
