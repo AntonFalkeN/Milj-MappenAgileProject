@@ -4,7 +4,7 @@ export default function ReturnButton() {
     const navigate = useNavigate();
 
     return (
-        <button onClick={() => navigate(-1)}>
+        <button onClick={() => navigate("/map")}>
         Go back
         </button>
     );
