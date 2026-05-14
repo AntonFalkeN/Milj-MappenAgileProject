@@ -22,5 +22,13 @@
 -- FROM test_table
 
 -- DELETE FROM Users;
+-- SELECT * FROM Users;
+
+
+
+
+-- DROP TABLE Users;
+-- DROP TABLE Pins;
+
+SELECT * FROM Pins;
 SELECT * FROM Users;
--- DROP TABLE Users

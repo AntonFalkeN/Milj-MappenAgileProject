@@ -4,15 +4,15 @@ import handlePins
 def testHandleUser():
     try:
         handleUser.removeUserByName("user1")
-        print("--------------------------------------")
-    except:
-        pass
+    except: pass
+    finally:
+        print("--------------------------------------")        
 
-    try:
+    try:        
         handleUser.removeUserByName("user2")
-        print("--------------------------------------")
-    except:
-        pass
+    except: pass
+    finally:
+        print("--------------------------------------")        
 
     handleUser.insertUser("user1", "password1")
     print("--------------------------------------")
@@ -36,33 +36,36 @@ def testHandleUser():
 
 
 def testHandlePins():
+    
     try:
-        handlePins.removePinByName("pin1")
+        handlePins.removePinByTitle("title1")    
+    except: pass        
+    finally:
         print("--------------------------------------")
-    except:
-        pass
 
     try:
-        handlePins.removePinByName("pin2")
+        handlePins.removePinByTitle("title2")    
+    except: pass        
+    finally:
         print("--------------------------------------")
-    except:
-        pass
 
-    handlePins.insertPin("pin1", 1, 1, "title1", "description1")    
+    handlePins.insertPin(1, 1, "title1", "description1", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")    
     print("--------------------------------------")
-    handlePins.insertPin("pin2", 2, 2, "title2", "description2")
+    handlePins.insertPin(2, 2, "title2", "description2", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+    print("--------------------------------------")
+
+    pins = handlePins.getPins()
+    print("--------------------------------------")    
+
+    handlePins.removePinByTitle("title1") 
+    print("--------------------------------------")
+
+    handlePins.removePinByTitle("title2")
     print("--------------------------------------")
 
     handlePins.getPins()
     print("--------------------------------------")    
 
-    handlePins.removePinWithID("pin1")    
-    print("--------------------------------------")
-
-    handlePins.removePinWithID("pin2")    
-    print("--------------------------------------")
-
-    handlePins.getPins()
-    print("--------------------------------------")    
-
+testHandleUser()
+print("======================================")
 testHandlePins()
