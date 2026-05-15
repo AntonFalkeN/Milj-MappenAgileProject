@@ -1,12 +1,31 @@
 // ProfilePage.jsx
 import "./ProfilePage.css";
 import BottomNav from "../components/BottomNav.jsx";
-import Header from "../components/Header.jsx";
+import Button from "../components/Button.jsx";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/useAuth";
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
+  const { refreshUser } = useAuth();
+  
+  async function logOut() {
+    const backendUrl = import.meta.env.VITE_API_URL;
+    await fetch(`${backendUrl}/api/logOut`, {
+      method: "POST",
+      credentials: "include",
+    });
+    await refreshUser();
+    navigate("/login");
+  }
+
   return (
     <div className="page">
-      <Header></Header>
+      {/* HEADER */}
+      <div className="header">
+        <h1>Profile</h1>
+        <div className="avatar-icon"></div>
+      </div>
 
       {/* CONTENT */}
       <div className="content">
@@ -25,6 +44,7 @@ export default function ProfilePage() {
             Example, pick up pant baskets at Kroksslätts Parkgata 29
           </div>
         </div>
+        <Button id="logout-button" onClick={logOut} variant="logout-button" text="Log Out" />
         <BottomNav />
       </div>
     </div>

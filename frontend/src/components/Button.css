@@ -31,6 +31,16 @@
   color: white;
 }
 
+.profile-button {
+  background-color: #a8cf9d;
+  color: #1f351f;
+  border-radius: 12px;
+  padding: 1rem 1rem;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
 
 .map-corner-top-right {
   position: absolute;

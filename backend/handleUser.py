@@ -120,3 +120,37 @@ def removeUserWithID(userID):
         if conn:
             conn.close()
 
+def getUserFromName(username):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+        # Create table if it doesn't exist
+        cursor.execute("""
+            SELECT id, name, password
+            FROM users
+            WHERE name = %s;
+            """, (username,))
+        
+        user = cursor.fetchone()                
+
+        if user:
+            print("User found", user)
+            return user
+
+        else:
+            print("No user found")
+            return None
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
