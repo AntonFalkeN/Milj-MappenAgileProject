@@ -3,60 +3,56 @@ import Button from "../components/Button"; // Importera Button-komponenten
 import "./Home.css"; // Importera CSS för Home-sidan
 import Footer from "../components/Footer";
 import gitJavaImage from "../assets/gitJava.png";
-import PictureGridSection from "../components/PictureGridSection";
+import PictureButton from "../components/pictureButton";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.
+  const [location, setLocation] = useState(null);
+  const [error, setError] = useState(null);
+  const [nearby, setNearby] = useState([]);
 
-  const nearYouItems = [
-    {
-      id: 1,
-      imageSrc: gitJavaImage,
-      imageAlt: "Nearby listing",
-    },
-    {
-      id: 2,
-      imageSrc: gitJavaImage,
-      imageAlt: "Nearby listing",
-    },
-    {
-      id: 3,
-      imageSrc: gitJavaImage,
-      imageAlt: "Nearby listing",
-    },
-    {
-      id: 4,
-      imageSrc: gitJavaImage,
-      imageAlt: "Nearby listing",
-    },
-  ];
 
-  const newListingItems = [
-    {
-      id: 1,
-      imageSrc: gitJavaImage,
-      imageAlt: "New listing",
-    },
-    {
-      id: 2,
-      imageSrc: gitJavaImage,
-      imageAlt: "New listing",
-    },
-    {
-      id: 3,
-      imageSrc: gitJavaImage,
-      imageAlt: "New listing",
-    },
-    {
-      id: 4,
-      imageSrc: gitJavaImage,
-      imageAlt: "New listing",
-    },
-  ];
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setError("Geolocation stöds inte");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("Latitude:", position.coords.latitude);
+        console.log("Longitude:", position.coords.longitude);
+
+        setLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      },
+      () => {
+        setError("Cant get position");
+      }
+    );
+  }, []);
+  useEffect(() => {
+  if (!location) return;
+    
+  fetch("http://localhost:8000/api/nearby", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    lat: location.lat,
+    lng: location.lng,
+  }),
+})
+  .then((res) => res.json())
+  .then((data) => setNearby(data));
+}, [location]);
+
 
   return (
     <div className="homePage">
-
       <svg
         className="greenBackgroundShape"
         viewBox="0 0 440 1190"
@@ -191,20 +187,31 @@ const Home = () => {
           />
         </div>
 
-        <PictureGridSection title="Near You" items={nearYouItems} />
+        <section className="nearYouSection">
+          <h2 className="nearYouTitle">Near You</h2>
 
-        <div className="homeSectionDivider" />
-
-        <PictureGridSection
-          title="New listings"
-          items={newListingItems}
-          sectionClassName="newListingsSection"
-        />
+          <div className="nearYouGrid">
+            {!location && <p>Fetching position</p>}
+            {location && nearby.length > 0 &&(
+              <>
+              {
+                nearby.slice(0,4).map((pin) => (
+                  <PictureButton key={pin.id} imageSrc={gitJavaImage} imageAlt={pin.id}/>
+                ))}
+            
+            {/*<PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing"/> */}
+            {/*<PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing"/> */}
+            {/*<PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing"/> */}
+            {/*<PictureButton imageSrc={gitJavaImage} imageAlt="Nearby listing"/> */}
+             </>
+            )}
+          </div>
+          <div className="nearYouDivider" />
+        </section>
       </main>
 
       <Footer />
     </div>
   );
 };
-
 export default Home;
