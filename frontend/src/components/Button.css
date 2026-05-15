@@ -31,6 +31,16 @@
   color: white;
 }
 
+.profile-button {
+  background-color: #a8cf9d;
+  color: #1f351f;
+  border-radius: 12px;
+  padding: 1rem 1rem;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
 
 .map-corner-top-right {
   position: absolute;
@@ -51,3 +61,11 @@
 .map-corner-top-right:hover {
   background: #f0f0f0;
 } 
+
+.search-btn {
+    flex-shrink: 0;
+    color: white;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    padding: clamp(0.4rem, 1vw, 0.8rem);
+    cursor: pointer;
+}

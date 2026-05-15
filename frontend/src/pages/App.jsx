@@ -9,11 +9,16 @@ import Login from "./Login.jsx";
 import ProfilePage from "./ProfilePage.jsx";
 import BottomNav from "../components/BottomNav.jsx";
 import Home from "./Home.jsx";
+import { useAuth } from "../context/useAuth.js";
+import Button from "../components/Button.jsx";
+import Header from "../components/Header.jsx";
+
 
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
 function MapPage() {
   const [markers, setMarkers] = useState([]);
+  const {user} = useAuth();
 
   const navigate = useNavigate();
   const onCreateAccount = () => {
@@ -44,15 +49,19 @@ function MapPage() {
 
   return (
     <div>
-      <div id="account-buttons">
-        <button id="login-button" onClick={onLogin}>
-          Login
-        </button>
-        <button id="create-account-button" onClick={onCreateAccount}>
-          Create Account
-        </button>
+      <Header></Header>
+      {<div id="account-buttons">
+        {!user && (console.log("No user logged in"),
+          <div>
+          <Button id="login-button" onClick={onLogin} variant="login-button" text="Log In" />
+          <Button id="create-account-button" onClick={onCreateAccount} variant="login-button" text="Create Account" />
+          </div>
+        )}
+        {user && ( console.log("User is logged in:", user),
+          <Button id="profile-button" onClick={() => navigate("/profile") } variant="profile-button" text="👤" />
+        )}
       </div>
-
+      }
       {/* {items.length === 0 ? (
         <p>Loading data from Python...</p>
       ) : (
@@ -71,8 +80,7 @@ function MapPage() {
 }
 
 export default function App() {
-  return (
-    
+  return(
     <Routes>
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/" element={<Home />}></Route>

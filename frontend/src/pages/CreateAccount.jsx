@@ -1,6 +1,7 @@
 import ReturnButton from "../components/ReturnButton";
 import { useState } from "react";
-import "./CreateAccount.css"
+import "./CreateAccount.css";
+import SearchGlass from "../components/SearchGlass.jsx";
 
 
 export default function CreateAccount() {
@@ -23,12 +24,12 @@ export default function CreateAccount() {
                 body: JSON.stringify(account),
             });
         
-        console.log("Response status:", res.status);
+            console.log("Response status:", res.status);
 
-        const data = await res.json();
-        console.log("Response body:", data);
-        setShowPopup(true);
-        return true;
+            const data = await res.json();
+            console.log("Response body:", data);
+            setShowPopup(true);
+            return true;
         } 
         else {
             setShowPopup(false);

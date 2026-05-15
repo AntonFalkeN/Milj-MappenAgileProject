@@ -1,0 +1,36 @@
+.Header {
+    width: 100%;
+
+    margin: 0 auto;
+    position: relative;
+}
+
+.HeaderSvg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.header-content {
+    position: absolute;
+
+    top: 55%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: white;
+    text-align: center;
+}
+.Header {
+    position: relative;
+}
+
+.search-glass-wrapper {
+    position: absolute;
+
+    top: 20%;
+    right: 10%;
+
+    transform: translate(-50%, -50%);
+}
