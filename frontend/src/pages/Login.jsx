@@ -2,6 +2,9 @@ import "./CreateAccount.css"
 import {useState} from "react";
 import ReturnButton from "../components/ReturnButton.jsx";
 import { useAuth } from "../context/useAuth";
+import CreateAccount from "./CreateAccount.jsx";
+import Button from "../components/Button.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
     const [username, setUsername] = useState("");
@@ -9,6 +12,10 @@ export default function LogIn() {
     const backendUrl = import.meta.env.VITE_API_URL;
     const [showPopup, setShowPopup] = useState(false);
     const { refreshUser } = useAuth();
+    const navigate = useNavigate();
+    const onCreateAccount = () => {
+    navigate("/create-account");
+    };
 
     async function sendForm(event){
         event.preventDefault(); // stoppar sidreload //KRÄVS FÖR SUBMIT!
@@ -35,6 +42,7 @@ export default function LogIn() {
     return (
             <div>
                 <ReturnButton />
+                <Button id="create-account-button" onClick={onCreateAccount} variant="login-button" text="Create Account" />
                 <h1>Log in</h1>
                 {!showPopup && (
                     <form onSubmit={sendForm}>

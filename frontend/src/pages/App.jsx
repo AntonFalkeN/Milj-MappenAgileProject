@@ -11,6 +11,7 @@ import BottomNav from "../components/BottomNav.jsx";
 import Home from "./Home.jsx";
 import { useAuth } from "../context/useAuth.js";
 import Button from "../components/Button.jsx";
+import Header from "../components/Header.jsx";
 
 
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
@@ -48,7 +49,8 @@ function MapPage() {
 
   return (
     <div>
-      <div id="account-buttons">
+      <Header></Header>
+      {<div id="account-buttons">
         {!user && (console.log("No user logged in"),
           <div>
           <Button id="login-button" onClick={onLogin} variant="login-button" text="Log In" />
@@ -59,7 +61,7 @@ function MapPage() {
           <Button id="profile-button" onClick={() => navigate("/profile") } variant="profile-button" text="👤" />
         )}
       </div>
-
+      }
       {/* {items.length === 0 ? (
         <p>Loading data from Python...</p>
       ) : (

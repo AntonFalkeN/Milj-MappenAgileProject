@@ -7,7 +7,7 @@ return (
 
 
     <svg className="HeaderSvg" 
-    viewBox="0 0 440 280" fill="none" xmlns="http://www.w3.org/2000/svg" > 
+    viewBox="0 0 440 150" fill="none" xmlns="http://www.w3.org/2000/svg" > 
         <ellipse cx="21" cy="15.5" rx="21" ry="15.5" transform="matrix(-1 0 0 1 458 109)" fill="#2D3F27" /> 
         <ellipse cx="21" cy="15.5" rx="21" ry="15.5" transform="matrix(-1 0 0 1 458 109)" fill="black" fillOpacity="0.2" /> 
         <ellipse cx="5" cy="117.5" rx="22" ry="15.5" fill="#2D3F27" />
