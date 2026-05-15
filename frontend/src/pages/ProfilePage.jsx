@@ -1,11 +1,12 @@
 // ProfilePage.jsx
 import "./ProfilePage.css";
 import BottomNav from "../components/BottomNav.jsx";
+import Header from "../components/Header.jsx";
 
 export default function ProfilePage() {
   return (
     <div className="page">
-      
+      <Header></Header>
 
       {/* CONTENT */}
       <div className="content">
@@ -24,6 +25,7 @@ export default function ProfilePage() {
             Example, pick up pant baskets at Kroksslätts Parkgata 29
           </div>
         </div>
+        <BottomNav />
       </div>
     </div>
   );

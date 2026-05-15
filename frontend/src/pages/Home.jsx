@@ -73,6 +73,7 @@ const Home = () => {
 
       <main className="homeContent">
         <Header></Header>
+        <BottomNav></BottomNav>
         <div className="publishButtonWrapper">
           <Button
             text="Publish"

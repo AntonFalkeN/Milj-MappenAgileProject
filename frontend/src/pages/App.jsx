@@ -10,6 +10,7 @@ import ProfilePage from "./ProfilePage.jsx";
 import BottomNav from "../components/BottomNav.jsx";
 import Home from "./Home.jsx";
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
+import Header from "../components/Header.jsx";
 
 function MapPage() {
   const [markers, setMarkers] = useState([]);
@@ -43,6 +44,8 @@ function MapPage() {
 
   return (
     <div>
+      <BottomNav></BottomNav>
+      <Header></Header>
       <div id="account-buttons">
         <button id="login-button" onClick={onLogin}>
           Login
@@ -51,18 +54,6 @@ function MapPage() {
           Create Account
         </button>
       </div>
-
-      {/* {items.length === 0 ? (
-        <p>Loading data from Python...</p>
-      ) : (
-        <ul>
-          {items.map((item) => (
-            <li key={item.id}>
-              <strong>{item.name}</strong> - Pick up at: {item.location}
-            </li>
-          ))}
-        </ul>
-      )} */}
       <MapComponent markers={markers} />
     </div>
   );

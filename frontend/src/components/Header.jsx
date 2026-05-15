@@ -25,10 +25,6 @@ return (
     <div className="search-glass-wrapper">
         <SearchGlass />
     </div>
-    <div className="header-content">
-        <h1>Welcome</h1>
-        <p>Find food near you</p>
-    </div>
 
     </header>
 );
