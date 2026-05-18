@@ -27,9 +27,10 @@ const ListingPage = () => {
   const [isTimeDropdownOpen, setIsTimeDropdownOpen] = useState(false);
 
   const categoryOptions = [
-    { label: "Plastic bottles", value: "plasticBottles" },
-    { label: "Cans", value: "cans" },
-    { label: "Other recycling", value: "otherRecycling" },
+    { label: "Pant", value: "Pant" },
+    { label: "Food Waste", value: "Food Waste"},
+    { label: "Fruit and Vegetables", value: "Fruit and Vegetables" },
+    { label: "Other recycling", value: "Other Recycling" },
   ];
 
   const pickupDurationOptions = [
