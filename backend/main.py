@@ -25,18 +25,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# @app.post("/api/items")
-# def add_item(item: dict): #dict should be taken as parameter for the databases' sakes
-#     id = item.get("id")
-#     lng = item.get("lng")
-#     lat = item.get("lat")
-#     title = item.get("title")
-#     description = item.get("description")
+@app.post("/api/items")
+def add_item(item: dict): #dict should be taken as parameter for the databases' sakes
+    username = "slobban" # this should be taken from the cookie/session in a real application, but for testing purposes we can hardcode it here
+    title = item.get("title")    
+    lng = item.get("lng")
+    lat = item.get("lat")
+    description = item.get("description")
+    # category = item.get("category")
+    # starts_time = item.get("starts_time")
+    # ends_time = item.get("ends_time")
     
-#     print("MARKER",id, lng, lat, title, description)
-#     handlePins.insertPin(id, lng, lat, title, description)
-    
-#     return {"message": "Item added successfully"}
+    print("MARKER",id, lng, lat, title, description)
+    handlePins.insertPin(username, title, lng, lat, description, "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+
+    return {"message": "Item added successfully"}
 
 @app.get("/api/items")
 def get_items():    
@@ -45,8 +48,8 @@ def get_items():
     # query_path = os.path.join(os.getcwd(), "sql_queries", "testing.sql")
     # with open(query_path, "r") as file:
     #     query = file.read()
-    handlePins.insertPin(11.97695, 57.68962, "Campus Johanneberg", "Chalmers University of Technology (Johanneberg)", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
-    handlePins.insertPin(11.936662797883773, 57.70653055063925, "Campus Lindholmen", "Chalmers University of Technology (Lindholmen)", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+    handlePins.insertPin("slobban", "Campus Johanneberg", 11.97695, 57.68962, "Chalmers University of Technology (Johanneberg)", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+    handlePins.insertPin("slobban", "Campus Lindholmen", 11.936662797883773, 57.70653055063925, "Chalmers University of Technology (Lindholmen)", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
 
     pins = handlePins.getPins()
     return pins

@@ -12,7 +12,8 @@ function MapComponent({ markers }) {
   const handleSave = (locationData) => {
     // add to backend here
     const newMarker = {
-      id: Date.now().toString(), //potentially generate ids like "username;number;timestamp" to avoid collisions and be able to remove easier
+      // id: Date.now().toString(), //potentially generate ids like "username;number;timestamp" to avoid collisions and be able to remove easier
+      
       lat: locationData.lat,
       lng: locationData.lng,
       title: locationData.title,

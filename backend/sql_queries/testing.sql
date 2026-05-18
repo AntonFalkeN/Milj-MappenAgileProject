@@ -32,3 +32,8 @@
 
 SELECT * FROM Pins;
 SELECT * FROM Users;
+
+-- cd backend/sql_queries
+-- psql -U postgres
+-- \c agile
+-- \i testing.sql

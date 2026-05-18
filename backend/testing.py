@@ -49,9 +49,9 @@ def testHandlePins():
     finally:
         print("--------------------------------------")
 
-    handlePins.insertPin(1, 1, "title1", "description1", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")    
+    handlePins.insertPin("user1", "title1", 1, 1, "description1", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")    
     print("--------------------------------------")
-    handlePins.insertPin(2, 2, "title2", "description2", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+    handlePins.insertPin("user2", "title2", 2, 2, "description2", "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
     print("--------------------------------------")
 
     pins = handlePins.getPins()
