@@ -11,8 +11,7 @@ import BottomNav from "../components/BottomNav.jsx";
 import Home from "./Home.jsx";
 import { useAuth } from "../context/useAuth.js";
 import Button from "../components/Button.jsx";
-
-
+import ListingPage from "./ListingPage.jsx";
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
 
 function MapPage() {
@@ -28,13 +27,13 @@ function MapPage() {
     navigate("/login");
   };
 
-      const testMarker = {
-      id: "TEST1234",
-      lng: 11.976,
-      lat: 57.68962,
-      title: "TESTMARKER",
-      description: "TESTTEASTTEST",
-    };
+  const testMarker = {
+    id: "TEST1234",
+    lng: 11.976,
+    lat: 57.68962,
+    title: "TESTMARKER",
+    description: "TESTTEASTTEST",
+  };
 
   // Fetch from backend
   useEffect(() => {
@@ -78,9 +77,11 @@ function MapPage() {
 }
 
 export default function App() {
-  return(
+  return (
+    
     <Routes>
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/listingPage" element={<ListingPage />} />
       <Route path="/" element={<Home />}></Route>
       <Route path="/create-account" element={<CreateAccount />}></Route>
       <Route path="/login" element={<Login />}></Route>

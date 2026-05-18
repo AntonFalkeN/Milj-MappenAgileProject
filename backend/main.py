@@ -19,7 +19,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Replace with your frontend URLq
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,18 +27,18 @@ app.add_middleware(
 
 @app.post("/api/items")
 def add_item(item: dict): #dict should be taken as parameter for the databases' sakes
-    user = item.get("user")
-    title = item.get("title")
+    username = "slobban" # this should be taken from the cookie/session in a real application, but for testing purposes we can hardcode it here
+    title = item.get("title")    
     lng = item.get("lng")
     lat = item.get("lat")
     description = item.get("description")
-    category = item.get("category")
-    startTime = item.get("startTime")
-    endTime = item.get("endTime")
+    # category = item.get("category")
+    # starts_time = item.get("starts_time")
+    # ends_time = item.get("ends_time")
     
-    print("MARKER: ", user, title, lng, lat, description, category, startTime, endTime)
-    handlePins.insertPin(user, title, lng, lat, description, category, startTime, endTime)
-    
+    print("MARKER",id, lng, lat, title, description)
+    handlePins.insertPin(username, title, lng, lat, description, "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+
     return {"message": "Item added successfully"}
 
 @app.get("/api/items")

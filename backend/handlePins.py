@@ -21,21 +21,21 @@ def insertPin(user, title, lng, lat, description, category, starts_time, ends_ti
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Pins (
                 id SERIAL PRIMARY KEY,
-                user TEXT NOT NULL,
+                username TEXT NOT NULL,
                 title TEXT NOT NULL,
                 lng REAL NOT NULL,
                 lat REAL NOT NULL,
                 description TEXT NOT NULL,
                 category TEXT NOT NULL,
-                start_time TIMESTAMP NOT NULL,
+                starts_time TIMESTAMP NOT NULL,
                 ends_time TIMESTAMP NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """)
 
-        # Insert user
+        # Insert pin
         cursor.execute("""
-            INSERT INTO Pins (id, lng, lat, title, description, category, starts_time, ends_time)
+            INSERT INTO Pins (username, title, lng, lat, description, category, starts_time, ends_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
         """, (user, title, lng, lat, description, category, starts_time, ends_time))
@@ -69,7 +69,7 @@ def getPins():
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, user, title, lng, lat, description, category, starts_time, ends_time, created_at
+            SELECT id, username, title, lng, lat, description, category, starts_time, ends_time, created_at
             FROM Pins
                        """)            
         
@@ -140,7 +140,7 @@ def getPinsFromCategory(category):
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, user, title, lng, lat, description, category, starts_time, ends_time, created_at
+            SELECT id, username, title, lng, lat, description, category, starts_time, ends_time, created_at
             FROM Pins
             WHERE category = %s
                        """, (category,))            
@@ -175,7 +175,7 @@ def getPinsFromDistance(coordinates, distance): #Coordinates as (lat, lng) tuple
 
 
         cursor.execute("""
-            SELECT id, user, title, lng, lat, description, category, starts_time, ends_time, created_at
+            SELECT id, username, title, lng, lat, description, category, starts_time, ends_time, created_at
             FROM Pins
                        """)            
         
@@ -209,3 +209,36 @@ def getPinsFromDistance(coordinates, distance): #Coordinates as (lat, lng) tuple
             conn.close()
 
 
+def removePinByTitle(name):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        
+        cursor.execute("""
+            DELETE FROM Pins
+            WHERE title = %s
+            RETURNING title
+                       """, (name,))            
+        
+        removedTitle = cursor.fetchone()
+
+        conn.commit()
+
+        if removedTitle:
+            print(f"Removed pin with title: {removedTitle['title']}")
+
+        else:
+            print("No pin found with that title")
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()

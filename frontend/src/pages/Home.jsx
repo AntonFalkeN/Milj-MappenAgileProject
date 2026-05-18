@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import gitJavaImage from "../assets/gitJava.png";
 import PictureGridSection from "../components/PictureGridSection";
 
+
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.
 

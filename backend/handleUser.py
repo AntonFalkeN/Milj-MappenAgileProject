@@ -51,6 +51,78 @@ def insertUser(name, password):
         
     return inserted_id
 
+
+def getUserByName(name):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+        # Create table if it doesn't exist
+        cursor.execute("""
+            SELECT id, name, password
+            FROM users
+            WHERE name = %s;
+            """, (name,))
+        
+        user = cursor.fetchall()                
+
+        if user:
+            print("User found", user)
+            return user
+
+        else:
+            print("No user found")
+            return None
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+    
+
+def removeUserByName(name):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor()       
+
+        # Delete user
+        cursor.execute("""
+            DELETE FROM Users
+            WHERE name = %s
+            RETURNING id;
+        """, (name,))
+
+        removed_id = cursor.fetchone()[0]
+
+        # Save changes
+        conn.commit()
+
+        print(f"Removed user with ID: {removed_id}")
+
+    except Exception as e:
+        print("Error:", e)
+        return None
+
+    finally:        
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+        
+    return removed_id
+
 def getUserFromID(userID):
     conn = None
     cursor = None
