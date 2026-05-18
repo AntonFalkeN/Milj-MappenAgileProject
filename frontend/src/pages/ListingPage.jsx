@@ -1,34 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/useAuth.js";
 import { useNavigate } from "react-router-dom";
 import "./ListingPage.css";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
 
-const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
+const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
 
 const ListingPage = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const debounceRef = useRef(null);
   const [results, setResults] = useState([]);
   const skipNextChange = useRef(false);
   const [location, setLocation] = useState(null);
-  const [description, setDescription] = useState('');
-  const [PickupTime, setPickupTime] = useState('');
-  
+  const [description, setDescription] = useState("");
+  const [PickupTime, setPickupTime] = useState("");
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [pickupDuration, setPickupDuration] = useState("");
   const [isTimeDropdownOpen, setIsTimeDropdownOpen] = useState(false);
 
   const categoryOptions = [
     { label: "Pant", value: "Pant" },
-    { label: "Food Waste", value: "Food Waste"},
+    { label: "Food Waste", value: "Food Waste" },
     { label: "Fruit and Vegetables", value: "Fruit and Vegetables" },
     { label: "Other recycling", value: "Other Recycling" },
   ];
@@ -40,7 +40,6 @@ const ListingPage = () => {
     { label: "12 hours", value: 12 },
     { label: "24 hours", value: 24 },
   ];
-
 
   // happenes when the query updates
   useEffect(() => {
@@ -57,7 +56,7 @@ const ListingPage = () => {
     setLocation({
       lat: "",
       lng: "",
-      title: ""
+      title: "",
     });
 
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -71,24 +70,24 @@ const ListingPage = () => {
 
   const searchAddress = async (q) => {
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const params = new URLSearchParams({
         q,
-        format: 'json',
+        format: "json",
         addressdetails: 1,
         limit: 5,
       });
       const res = await fetch(`${NOMINATIM_URL}?${params}`, {
         headers: {
-          'User-Agent': 'WasteWatchersApp',
+          "User-Agent": "WasteWatchersApp",
         },
       });
-      if (!res.ok) throw new Error('Request failed');
+      if (!res.ok) throw new Error("Request failed");
       const data = await res.json();
       setResults(data);
     } catch (err) {
-      setError('Search failed. Please try again.');
+      setError("Search failed. Please try again.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -96,21 +95,20 @@ const ListingPage = () => {
   };
 
   const handleSelect = (item) => {
-    skipNextChange.current = true;  
+    skipNextChange.current = true;
     const isNumber = (value) => !isNaN(parseFloat(value)) && isFinite(value);
-    const split = item.display_name.split(',');
+    const split = item.display_name.split(",");
     var title;
     if (isNumber(split[0])) {
       title = split[1] + " " + split[0];
-    }
-    else {
+    } else {
       title = split[0];
     }
     setQuery(title);
     setLocation({
       lat: parseFloat(item.lat),
       lng: parseFloat(item.lon),
-      title: title
+      title: title,
     });
     setResults([]);
   };
@@ -161,19 +159,19 @@ const ListingPage = () => {
     navigate("/map");
   };
 
-  async function deliverPin(marker) { //take marker as parameter
+  async function deliverPin(marker) {
+    //take marker as parameter
     console.log("Delivering pin:", marker);
     const backendUrl = import.meta.env.VITE_API_URL;
 
     const res = await fetch(`${backendUrl}/api/items`, {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(marker),
     });
     const data = await res.json();
     console.log(data);
   }
-
 
   return (
     <div className="listingPage">
@@ -354,7 +352,11 @@ const ListingPage = () => {
 
           <div className="listingTextInputWrapper">
             <input
-              className="listingTextInput"
+              className={
+                results.length > 0
+                  ? "listingTextInput addressInputOpen"
+                  : "listingTextInput"
+              }
               type="text"
               placeholder="Address"
               value={query}
