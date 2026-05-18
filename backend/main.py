@@ -27,14 +27,17 @@ app.add_middleware(
 
 @app.post("/api/items")
 def add_item(item: dict): #dict should be taken as parameter for the databases' sakes
-    id = item.get("id")
+    user = item.get("user")
+    title = item.get("title")
     lng = item.get("lng")
     lat = item.get("lat")
-    title = item.get("title")
     description = item.get("description")
+    category = item.get("category")
+    startTime = item.get("startTime")
+    endTime = item.get("endTime")
     
-    print("MARKER",id, lng, lat, title, description)
-    handlePins.insertPin(id, lng, lat, title, description)
+    print("MARKER: ", user, title, lng, lat, description, category, startTime, endTime)
+    handlePins.insertPin(user, title, lng, lat, description, category, startTime, endTime)
     
     return {"message": "Item added successfully"}
 
@@ -45,8 +48,8 @@ def get_items():
     # query_path = os.path.join(os.getcwd(), "sql_queries", "testing.sql")
     # with open(query_path, "r") as file:
     #     query = file.read()
-    handlePins.insertPin("Johanneberg", 11.97695, 57.68962, "Campus Johanneberg", "Chalmers University of Technology (Johanneberg)", "cans", "00:00;02:00")
-    handlePins.insertPin("Lindholmen", 11.936662797883773, 57.70653055063925, "Campus Lindholmen", "Chalmers University of Technology (Lindholmen)", "cans", "00:00;02:00")
+    handlePins.insertPin("testUser", "Johanneberg", 11.97695, 57.68962, "Go to Hubben and ask for Banger to collect", "cans", "2026-05-26 00:00:00", "2026-05-26 23:59:59")
+    handlePins.insertPin(user="testUser", title="Lindholmen", lng=11.936662797883773, lat=57.70653055063925, description="Go to Styrbord and ask for Bo-Rolf", category="fruit", starts_time="2026-05-26 00:00:00", ends_time="2026-05-26 23:59:59")
 
     pins = handlePins.getPins()
     return pins

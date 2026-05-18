@@ -11,7 +11,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 def insertPin(user, title, lng, lat, description, category, starts_time, ends_time):
     conn = None
     cursor = None
-
+    print("Inserting pin with data: ", user, title, lng, lat, description, category, starts_time, ends_time)
     try:
         # Connect to Railway PostgreSQL
         conn = psycopg2.connect(DATABASE_URL)
@@ -73,7 +73,7 @@ def getPins():
             FROM Pins
                        """)            
         
-        pin = cursor.fetchall()                
+        pin = cursor.fetchall()                 
 
         if pin:
             print("Pins found", pin)
