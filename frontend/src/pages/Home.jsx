@@ -188,7 +188,7 @@ const Home = () => {
           <Button
             text="Publish"
             variant="publish-button"
-            onClick={() => navigate("/listingPage")}
+            onClick={() => navigate("/map")}
           />
         </div>
 
