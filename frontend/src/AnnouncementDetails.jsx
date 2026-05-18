@@ -25,8 +25,12 @@ export default function AnnouncementDetails() {
 
       <div>
         <h1>{location.title}</h1>
+        <h2>{location.category}</h2>
         <p>{location.description}</p>
-        <p>ID: {id}</p>
+        <p> </p>
+        <p>{location.starts_time}</p>
+        <p>to</p>
+        <p>{location.ends_time}</p>
       </div>
     </div>
   );

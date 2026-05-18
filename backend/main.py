@@ -21,7 +21,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Replace with your frontend URLq
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,15 +29,18 @@ app.add_middleware(
 
 @app.post("/api/items")
 def add_item(item: dict): #dict should be taken as parameter for the databases' sakes
-    id = item.get("id")
+    username = "slobban" # this should be taken from the cookie/session in a real application, but for testing purposes we can hardcode it here
+    title = item.get("title")    
     lng = item.get("lng")
     lat = item.get("lat")
-    title = item.get("title")
     description = item.get("description")
+    # category = item.get("category")
+    # starts_time = item.get("starts_time")
+    # ends_time = item.get("ends_time")
     
     print("MARKER",id, lng, lat, title, description)
-    handlePins.insertPin(id, lng, lat, title, description)
-    
+    handlePins.insertPin(username, title, lng, lat, description, "pant", "2024-06-01T12:00:00Z", "2024-06-01T12:00:00Z")
+
     return {"message": "Item added successfully"}
 
 @app.get("/api/items")
@@ -47,9 +50,8 @@ def get_items():
     # query_path = os.path.join(os.getcwd(), "sql_queries", "testing.sql")
     # with open(query_path, "r") as file:
     #     query = file.read()
-    handlePins.insertPin("Johanneberg", 11.97695, 57.68962, "Campus Johanneberg", "Chalmers University of Technology (Johanneberg)")
-    handlePins.insertPin("Lindholmen", 11.936662797883773, 57.70653055063925, "Campus Lindholmen", "Chalmers University of Technology (Lindholmen)")
-    handlePins.insertPin("Anton", 11.936662797883773, 57.70653055063925, "Campus Anton", "Chalmers Anton of Technology (Anton)")
+    handlePins.insertPin("testUser", "Johanneberg", 11.97695, 57.68962, "Go to Hubben and ask for Banger to collect", "cans", "2026-05-26 00:00:00", "2026-05-26 23:59:59")
+    handlePins.insertPin(user="testUser", title="Lindholmen", lng=11.936662797883773, lat=57.70653055063925, description="Go to Styrbord and ask for Bo-Rolf", category="fruit", starts_time="2026-05-26 00:00:00", ends_time="2026-05-26 23:59:59")
 
     pins = handlePins.getPins()
     return pins

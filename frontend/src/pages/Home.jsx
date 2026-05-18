@@ -10,6 +10,7 @@ import Header from "../components/Header.jsx";
 import PictureButton from "../components/pictureButton";
 import { useEffect, useState } from "react";
 
+
 const Home = () => {
   const navigate = useNavigate(); // Använd useNavigate() för att få tillgång till navigeringsfunktionen. Lägg funktionen i variabeln navigate.
   const [location, setLocation] = useState(null);
