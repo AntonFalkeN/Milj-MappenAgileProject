@@ -9,35 +9,6 @@ import Button from './Button';
 function MapComponent({ markers }) {
   const navigate = useNavigate();
   const [selected, setSelected] = React.useState(null);
-  const [popupOpen, setPopupOpen] = React.useState(false);
-
-  const handleSave = (locationData) => {
-    // add to backend here
-    const newMarker = {
-      // id: Date.now().toString(), //potentially generate ids like "username;number;timestamp" to avoid collisions and be able to remove easier
-      
-      lat: locationData.lat,
-      lng: locationData.lng,
-      title: locationData.title,
-      description: locationData.description,
-    };
-    deliverPin(newMarker);
-    setPopupOpen(false);
-  };
-
-  async function deliverPin(marker) { //take marker as parameter
-    console.log("Delivering pin:", marker);
-    const backendUrl = import.meta.env.VITE_API_URL;
-
-    const res = await fetch(`${backendUrl}/api/items`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(marker),
-    });
-    const data = await res.json();
-    console.log(data);
-  }
-
 
   return (
     <div style={{ position: 'relative', height: '70vh' }}>
