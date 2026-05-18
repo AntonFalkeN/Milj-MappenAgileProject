@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useAuth } from "../context/useAuth.js";
 import "./ListingPage.css";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
@@ -6,6 +7,8 @@ import Button from "../components/Button";
 const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
 
 const ListingPage = () => {
+  const {user} = useAuth();
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
@@ -141,7 +144,7 @@ const ListingPage = () => {
     );
 
     const pickupData = {
-      id: "TEMP",
+      username: user,
       title: location.title,
       lng: location.lng,
       lat: location.lat,
@@ -151,8 +154,21 @@ const ListingPage = () => {
       endTime: lastPickupTime.toISOString(),
     };
 
-    console.log(pickupData);
+    deliverPin(pickupData);
   };
+
+  async function deliverPin(marker) { //take marker as parameter
+    console.log("Delivering pin:", marker);
+    const backendUrl = import.meta.env.VITE_API_URL;
+
+    const res = await fetch(`${backendUrl}/api/items`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(marker),
+    });
+    const data = await res.json();
+    console.log(data);
+  }
 
 
   return (
