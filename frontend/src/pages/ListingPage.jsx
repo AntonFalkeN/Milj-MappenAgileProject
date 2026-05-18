@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from "../context/useAuth.js";
+import { useNavigate } from "react-router-dom";
 import "./ListingPage.css";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
@@ -8,6 +9,7 @@ const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
 
 const ListingPage = () => {
   const {user} = useAuth();
+  const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [query, setQuery] = useState('');
@@ -155,6 +157,7 @@ const ListingPage = () => {
     };
 
     deliverPin(pickupData);
+    navigate("/map");
   };
 
   async function deliverPin(marker) { //take marker as parameter
