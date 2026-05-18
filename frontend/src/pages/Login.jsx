@@ -1,4 +1,4 @@
-import "./CreateAccount.css"
+import "./Login.css"
 import {useState} from "react";
 import ReturnButton from "../components/ReturnButton.jsx";
 import { useAuth } from "../context/useAuth";
@@ -40,9 +40,8 @@ export default function LogIn() {
     }
 
     return (
-            <div>
-                <ReturnButton />
-                <Button id="create-account-button" onClick={onCreateAccount} variant="login-button" text="Create Account" />
+            <div className="loginPage">
+                <div className="loginBox">
                 <h1>Log in</h1>
                 {!showPopup && (
                     <form onSubmit={sendForm}>
@@ -67,6 +66,11 @@ export default function LogIn() {
                     <ReturnButton />
                     </div>
                 )}
+                <Button id="create-account-button" onClick={onCreateAccount} variant="login-button" text="Create Account" />
+                <div className="backButtonWrapper">
+                    <ReturnButton />
+                </div>
             </div>
+        </div>
     )
 }

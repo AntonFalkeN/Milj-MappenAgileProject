@@ -12,6 +12,7 @@ import Home from "./Home.jsx";
 import { useAuth } from "../context/useAuth.js";
 import Button from "../components/Button.jsx";
 import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 
 
 import AnnouncementDetails from "../AnnouncementDetails.jsx";
@@ -50,6 +51,7 @@ function MapPage() {
   return (
     <div>
       <Header></Header>
+      {/*
       {<div id="account-buttons">
         {!user && (console.log("No user logged in"),
           <div>
@@ -61,7 +63,7 @@ function MapPage() {
           <Button id="profile-button" onClick={() => navigate("/profile") } variant="profile-button" text="👤" />
         )}
       </div>
-      }
+      }*/}
       {/* {items.length === 0 ? (
         <p>Loading data from Python...</p>
       ) : (
@@ -75,6 +77,7 @@ function MapPage() {
       )} */}
       <MapComponent markers={markers} />
       <BottomNav />
+      <Footer></Footer>
     </div>
   );
 }
