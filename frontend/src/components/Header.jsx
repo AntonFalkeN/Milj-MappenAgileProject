@@ -1,7 +1,23 @@
 import "./Header.css";
 import SearchGlass from "./SearchGlass";
+import { SearchResultsList } from "./searchResultsList";
+import { useState, useEffect } from "react";
 
 export default function Header() {
+    const [pins, setPins] = useState([]);
+    const [filteredPins, setFilteredPins] = useState([]);
+    const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        fetch("http://localhost:8000/api/pins")
+        .then(res => res.json())
+        .then(data => {
+            console.log("PINS FROM API:", data);
+            setPins(data);
+            setFilteredPins(data);
+        });
+    }, []);
+
 return (
     <header className="Header">
 
@@ -23,7 +39,8 @@ return (
             <feFlood floodOpacity="0" result="BackgroundImageFix" /> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" /> <feOffset dy="4" /> <feGaussianBlur stdDeviation="2" /> <feComposite in2="hardAlpha" operator="out" /> <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" /> <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_72" /> <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_72" result="shape" /> </filter> </defs> 
     </svg>
     <div className="search-glass-wrapper">
-        <SearchGlass />
+        <SearchGlass pins={pins} setFilteredPins={setFilteredPins} search={search} setSearch={setSearch}/>
+        {search.length > 0 && (<SearchResultsList results={filteredPins} />)}
     </div>
 
     </header>

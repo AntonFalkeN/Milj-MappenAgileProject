@@ -67,7 +67,7 @@ def getPins():
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, title, lng, lat, description, category, starts_time, ends_time
+            SELECT id, title, lng, lat, description
             FROM Pins
                        """)            
         

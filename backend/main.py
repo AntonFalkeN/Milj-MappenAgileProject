@@ -120,3 +120,10 @@ def me(request: Request):
 def logout(response: Response):
     response.delete_cookie("userSession")
     return {"status": "ok"}
+
+@app.get("/api/pins")
+def readPins():
+    pins = handlePins.getPins()
+    print("PIPIPIPIINNS:")
+    print(pins)
+    return pins
