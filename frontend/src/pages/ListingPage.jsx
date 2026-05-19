@@ -145,14 +145,14 @@ const ListingPage = () => {
     );
 
     const pickupData = {
-      username: user,
+      user: user,
       title: location.title,
       lng: location.lng,
       lat: location.lat,
       description: description.trim(),
       category: selectedCategory.value,
-      startTime: firstPickupTime.toISOString(),
-      endTime: lastPickupTime.toISOString(),
+      startsTime: firstPickupTime.toISOString(),
+      endsTime: lastPickupTime.toISOString(),
     };
 
     deliverPin(pickupData);

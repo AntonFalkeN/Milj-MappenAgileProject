@@ -25,7 +25,7 @@ function MapComponent({ markers = [] }) {
         mapStyle="mapbox://styles/mapbox/streets-v11"
         pitchWithRotate={false}
       >
-        {markers.map(m => (
+        {(markers || []).map(m => (
           <Marker key={m.id} longitude={m.lng} latitude={m.lat} anchor="bottom">
             <div
               onClick={(e) => {
