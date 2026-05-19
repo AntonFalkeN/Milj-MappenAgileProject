@@ -40,8 +40,8 @@ const Home = () => {
   }, []);
   useEffect(() => {
   if (!location) return;
-    
-  fetch("http://localhost:8000/api/nearby", {
+  
+  fetch(`${import.meta.env.VITE_API_URL}/api/nearby`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

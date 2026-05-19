@@ -21,7 +21,7 @@ export default function LogIn() {
         event.preventDefault(); // stoppar sidreload //KRÄVS FÖR SUBMIT!
         console.log("Submitting form:", {username,password,});
 
-        const res = await fetch(`${backendUrl}/api/logIn`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
         method: "POST",
             headers: {"Content-Type": "application/json",},
             credentials: "include",

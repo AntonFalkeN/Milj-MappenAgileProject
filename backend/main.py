@@ -51,22 +51,22 @@ def get_items():
     # with open(query_path, "r") as file:
     #     query = file.read()
     handlePins.insertPin("testUser", "Johanneberg", 11.97695, 57.68962, "Go to Hubben and ask for Banger to collect", "cans", "2026-05-26 00:00:00", "2026-05-26 23:59:59")
-    handlePins.insertPin(user="testUser", title="Lindholmen", lng=11.936662797883773, lat=57.70653055063925, description="Go to Styrbord and ask for Bo-Rolf", category="fruit", starts_time="2026-05-26 00:00:00", ends_time="2026-05-26 23:59:59")
+    handlePins.insertPin(id="test", username="testUser", title="Lindholmen", lng=11.936662797883773, lat=57.70653055063925, description="Go to Styrbord and ask for Bo-Rolf", category="fruit", starts_time="2026-05-26 00:00:00", ends_time="2026-05-26 23:59:59")
 
     pins = handlePins.getPins()
     return pins
 
 class LoginRequest(BaseModel):
-    name:str
+    username:str
     password:str
 
 @app.post("/api/login")
 def login(data:LoginRequest):
-    print(data.name)
+    print(data.username)
     print(data.password)
     #Test if account exists
 
-    return {"status": "ok", "user": data.name}
+    return {"status": "ok", "user": data.username}
 
 class NearbyRequest(BaseModel):
     lat: float
@@ -126,6 +126,4 @@ def logout(response: Response):
 @app.get("/api/pins")
 def readPins():
     pins = handlePins.getPins()
-    print("PIPIPIPIINNS:")
-    print(pins)
     return pins

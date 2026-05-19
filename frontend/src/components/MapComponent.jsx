@@ -6,7 +6,7 @@ import PopupContent from "../PopupContent";
 import Button from './Button';
 
 
-function MapComponent({ markers }) {
+function MapComponent({ markers = [] }) {
   const navigate = useNavigate();
   const [selected, setSelected] = React.useState(null);
 
