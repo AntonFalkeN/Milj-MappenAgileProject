@@ -9,7 +9,7 @@ import Footer from "../components/Footer.jsx";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
-  const { refreshUser } = useAuth();
+  const { user, refreshUser } = useAuth();
   
   async function logOut() {
     const backendUrl = import.meta.env.VITE_API_URL;
@@ -21,6 +21,7 @@ export default function ProfilePage() {
     navigate("/login");
   }
 
+
   return (
     <div className="page">
       <Header></Header>
@@ -31,7 +32,7 @@ export default function ProfilePage() {
 
       {/* CONTENT */}
       <div className="content">
-        <h2 className="name">Alex Löfstedt</h2>
+        <h2 className="name">{user}</h2>
 
         {/* PROFILE IMAGE */}
         <div className="image-box">

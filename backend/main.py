@@ -81,7 +81,6 @@ def logIn(data: LoginRequest, response: Response):
 @app.get("/api/me")
 def me(request: Request):
     user = request.cookies.get("userSession")
-
     if not user:
         return {"loggedIn": False}
 
