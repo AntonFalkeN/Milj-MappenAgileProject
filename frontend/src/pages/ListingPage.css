@@ -313,3 +313,25 @@
     transform: scaleY(1);
   }
 }
+
+.listingPage button {
+  max-width: none;
+}
+
+.listingPage input {
+  max-width: none;
+}
+
+.listingPage .listingDropdownButton,
+.listingPage .listingDropdownOption {
+  width: 100%;
+}
+
+.listingPage .listingTextInput {
+  width: 100%;
+  max-width: none;
+}
+
+.listingPage button:active {
+  transform: none;
+}
