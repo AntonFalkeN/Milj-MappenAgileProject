@@ -8,10 +8,10 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-def insertPin(id, lng, lat, title, description, category, starts_time, ends_time):
+def insertPin(user, title, lng, lat, description, category, starts_time, ends_time):
     conn = None
     cursor = None
-
+    print("Inserting pin with data: ", user, title, lng, lat, description, category, starts_time, ends_time)
     try:
         # Connect to Railway PostgreSQL
         conn = psycopg2.connect(DATABASE_URL)
@@ -20,23 +20,25 @@ def insertPin(id, lng, lat, title, description, category, starts_time, ends_time
         # Create table if it doesn't exist
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS Pins (
-                id PRIMARY KEY,
+                id SERIAL PRIMARY KEY,
+                username TEXT NOT NULL,
                 title TEXT NOT NULL,
                 lng REAL NOT NULL,
                 lat REAL NOT NULL,
                 description TEXT NOT NULL,
                 category TEXT NOT NULL,
-                start_time TIMESTAMP NOT NULL,
-                ends_time TIMESTAMP NOT NULL
+                starts_time TIMESTAMP NOT NULL,
+                ends_time TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """)
 
-        # Insert user
+        # Insert pin
         cursor.execute("""
-            INSERT INTO Pins (id, lng, lat, title, description, category, starts_time, ends_time)
+            INSERT INTO Pins (username, title, lng, lat, description, category, starts_time, ends_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
-        """, (id, title, lng, lat, description, category, starts_time, ends_time))
+        """, (user, title, lng, lat, description, category, starts_time, ends_time))
 
         inserted_id = cursor.fetchone()[0]
         print()
@@ -67,11 +69,11 @@ def getPins():
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, title, lng, lat, description, category, starts_time, ends_time
+            SELECT id, username, title, lng, lat, description, category, starts_time, ends_time, created_at
             FROM Pins
                        """)            
         
-        pin = cursor.fetchall()                
+        pin = cursor.fetchall()                 
 
         if pin:
             print("Pins found", pin)
@@ -138,7 +140,7 @@ def getPinsFromCategory(category):
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         
         cursor.execute("""
-            SELECT id, title, lng, lat, description, category, starts_time, ends_time
+            SELECT id, username, title, lng, lat, description, category, starts_time, ends_time, created_at
             FROM Pins
             WHERE category = %s
                        """, (category,))            
@@ -173,7 +175,7 @@ def getPinsFromDistance(coordinates, distance): #Coordinates as (lat, lng) tuple
 
 
         cursor.execute("""
-            SELECT id, title, lng, lat, description, category, starts_time, ends_time
+            SELECT id, username, title, lng, lat, description, category, starts_time, ends_time, created_at
             FROM Pins
                        """)            
         
@@ -207,3 +209,36 @@ def getPinsFromDistance(coordinates, distance): #Coordinates as (lat, lng) tuple
             conn.close()
 
 
+def removePinByTitle(name):
+    conn = None
+    cursor = None
+
+    try:
+        # Connect to Railway PostgreSQL
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        
+        cursor.execute("""
+            DELETE FROM Pins
+            WHERE title = %s
+            RETURNING title
+                       """, (name,))            
+        
+        removedTitle = cursor.fetchone()
+
+        conn.commit()
+
+        if removedTitle:
+            print(f"Removed pin with title: {removedTitle['title']}")
+
+        else:
+            print("No pin found with that title")
+
+    except Exception as e:
+        print("Error", e)
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()

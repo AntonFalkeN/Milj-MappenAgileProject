@@ -34,3 +34,7 @@
 
     transform: translate(-50%, -50%);
 }
+
+.search-container {
+    position: relative;
+}
