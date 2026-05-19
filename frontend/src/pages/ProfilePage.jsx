@@ -4,6 +4,8 @@ import BottomNav from "../components/BottomNav.jsx";
 import Button from "../components/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ export default function ProfilePage() {
 
   return (
     <div className="page">
-      {/* HEADER */}
+      <Header></Header>
       <div className="header">
         <h1>Profile</h1>
         <div className="avatar-icon"></div>
@@ -46,6 +48,7 @@ export default function ProfilePage() {
         </div>
         <Button id="logout-button" onClick={logOut} variant="logout-button" text="Log Out" />
         <BottomNav />
+      <Footer></Footer>
       </div>
     </div>
   );
